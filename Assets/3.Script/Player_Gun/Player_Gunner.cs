@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Move : MonoBehaviour
+public class Player_Gunner : MonoBehaviour
 {
     [SerializeField] public float walkSpeed = 100f;
     [SerializeField] public float runSpeed = 150f;
@@ -49,6 +49,14 @@ public class Player_Move : MonoBehaviour
     private Player_Health player_Health;
 
     private Coroutine movementSoundCoroutine;
+
+    #region 승주 - Gunner
+    public GameObject[] weapons; //스왑 장비들 (HandGun, Submachinegun)
+    bool sDown1; //1번장비
+    bool sDown2; //2번장비
+    GameObject equipWeapon; //기존 장착된 무기 저장 변수
+    bool isSwap;
+    #endregion
 
     private void Start()
     {
@@ -173,8 +181,43 @@ public class Player_Move : MonoBehaviour
         //Attack(); // 공격 처리
         // 마우스 위치를 향해 플레이어 회전
         RotatePlayerToMouse();
+
+        //Gun
+        GetInput();
+        Swap();
+    }
+    private void GetInput()
+    {
+        sDown1 = Input.GetButtonDown("Swap1");
+        sDown2 = Input.GetButtonDown("Swap2");
     }
 
+    private void Swap()
+    {
+        
+        int weaponIndex = -1;
+        if (sDown1) weaponIndex = 0;
+        if (sDown2) weaponIndex = 1;
+
+        if ((sDown1 || sDown2) && !isDazed)
+        {
+            equipWeapon.SetActive(false); //손에 이미 들려있기 때문에
+            equipWeapon = weapons[weaponIndex];
+            equipWeapon.SetActive(true);
+
+            playerAnimator.SetTrigger("doSwap");
+
+            isSwap = true;
+
+            Invoke("Swapout", 0.5f);
+        }
+    }
+    private void SwapOut()
+    {
+       
+        isSwap = false;
+    
+    }
     private void FixedUpdate()
     {
         player_r.angularVelocity = Vector3.zero;
@@ -203,23 +246,23 @@ public class Player_Move : MonoBehaviour
         playerAnimator.SetBool("isDazed", true);
     }
 
-    //private void Attack()
-    //{
-    //    fireDelay += Time.deltaTime;
-    //    isFireReady = (equiaWeapon.rate < fireDelay);
+    private void Attack()
+    {
+        fireDelay += Time.deltaTime;
+        isFireReady = (equipWeapon.rate < fireDelay);
 
-    //    if (fdown && isFireReady && !isRolling && !isDazed)
-    //    {
-    //        isAttacking = true; // 공격 시작
-    //        equiaWeapon.Use();
-    //        playerAnimator.SetTrigger("DoSwing");
-    //        fireDelay = 0;
+        if (fdown && isFireReady && !isRolling && !isDazed)
+        {
+            isAttacking = true; // 공격 시작
+            equipWeapon.Use();
+            playerAnimator.SetTrigger("doShot");
+            fireDelay = 0;
 
-    //        player_audio.PlayOneShot(swing_sound);
-    //        // 공격 애니메이션이 끝날 때까지 대기
-    //        StartCoroutine(EndAttackAfterAnimation());
-    //    }
-    //}
+            player_audio.PlayOneShot(swing_sound);
+            // 공격 애니메이션이 끝날 때까지 대기
+            StartCoroutine(EndAttackAfterAnimation());
+        }
+    }
 
     private IEnumerator EndAttackAfterAnimation()
     {
@@ -244,7 +287,8 @@ public class Player_Move : MonoBehaviour
             isColliding = true;
             StartDazed();
             StartCoroutine(EndCollisionAfterDaze());
-        }else if (collision.gameObject.CompareTag("Enemy"))
+        }
+        else if (collision.gameObject.CompareTag("Enemy"))
         {
             //추가해야함~
         }
