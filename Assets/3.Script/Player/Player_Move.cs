@@ -34,11 +34,13 @@ public class Player_Move : MonoBehaviour
     [SerializeField] private Weapon equiaWeapon;
 
     private Animator playerAnimator;
+    private Rigidbody player_r;
 
     private void Start()
     {
         // 자식 오브젝트에서 Animator 컴포넌트를 찾아 할당
         playerAnimator = GetComponentInChildren<Animator>();
+        player_r = GetComponent<Rigidbody>();
         if (playerAnimator == null)
         {
             Debug.LogError("Animator component not found in children.");
@@ -139,6 +141,11 @@ public class Player_Move : MonoBehaviour
 
         // 마우스 위치를 향해 플레이어 회전
         RotatePlayerToMouse();
+    }
+
+    private void FixedUpdate()
+    {
+        player_r.angularVelocity = Vector3.zero;
     }
 
     private void RotatePlayerToMouse()
