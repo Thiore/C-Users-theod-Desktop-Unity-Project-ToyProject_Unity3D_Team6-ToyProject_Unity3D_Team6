@@ -427,9 +427,10 @@ GameObject:
   - component: {fileID: 180456141028008620}
   - component: {fileID: 180456141028008621}
   - component: {fileID: 180456141028008618}
+  - component: {fileID: -4461386257042214457}
   m_Layer: 0
   m_Name: Enemy_Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -516,6 +517,19 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 5, z: 0.5}
+--- !u!65 &-4461386257042214457
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6258152058021512653}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9, y: 9, z: 9}
   m_Center: {x: 0, y: 5, z: 0.5}
 --- !u!1 &6859416023637543178
 GameObject:

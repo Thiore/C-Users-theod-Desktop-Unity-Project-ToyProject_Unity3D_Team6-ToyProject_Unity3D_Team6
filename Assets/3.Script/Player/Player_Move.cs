@@ -206,7 +206,7 @@ public class Player_Move : MonoBehaviour
     private void Attack()
     {
         fireDelay += Time.deltaTime;
-        isFireReady = equiaWeapon.rate < fireDelay;
+        isFireReady = (equiaWeapon.rate < fireDelay);
 
         if (fdown && isFireReady && !isRolling && !isDazed)
         {
@@ -244,6 +244,9 @@ public class Player_Move : MonoBehaviour
             isColliding = true;
             StartDazed();
             StartCoroutine(EndCollisionAfterDaze());
+        }else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            //추가해야함~
         }
     }
 

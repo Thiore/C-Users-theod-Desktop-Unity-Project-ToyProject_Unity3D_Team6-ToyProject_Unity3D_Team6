@@ -77,9 +77,10 @@ GameObject:
   - component: {fileID: 2465145189000554086}
   - component: {fileID: 4854316906887589466}
   - component: {fileID: 7146854156237976808}
+  - component: {fileID: -5334772489688087729}
   m_Layer: 0
   m_Name: Enemy_common
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,6 +167,19 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 3}
+  m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!65 &-5334772489688087729
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008591189411493297}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &2256072532240610717
 GameObject:

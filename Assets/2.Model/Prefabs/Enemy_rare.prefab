@@ -156,9 +156,10 @@ GameObject:
   - component: {fileID: 2473902242009392491}
   - component: {fileID: 2473902242009392492}
   - component: {fileID: 2473902242009392493}
+  - component: {fileID: -2197447072800969115}
   m_Layer: 0
   m_Name: Enemy_rare
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -245,6 +246,19 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 3}
+  m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!65 &-2197447072800969115
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2473902242009392494}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 2.5, z: 2.5}
   m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &2981932145346207577
 GameObject:
