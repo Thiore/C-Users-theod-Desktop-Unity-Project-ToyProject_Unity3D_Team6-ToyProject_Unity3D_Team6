@@ -36,11 +36,14 @@ public class Player_Move : MonoBehaviour
     private Animator playerAnimator;
     private Rigidbody player_r;
 
+    private Player_Health player_Health;
+
     private void Start()
     {
         // 자식 오브젝트에서 Animator 컴포넌트를 찾아 할당
         playerAnimator = GetComponentInChildren<Animator>();
         player_r = GetComponent<Rigidbody>();
+        player_Health = GetComponent<Player_Health>();
         if (playerAnimator == null)
         {
             Debug.LogError("Animator component not found in children.");
@@ -51,6 +54,11 @@ public class Player_Move : MonoBehaviour
 
     private void Update()
     {
+        if (player_Health.isDie)
+        {
+            return;
+        }
+
         // Dazed 상태일 때
         if (isDazed)
         {
