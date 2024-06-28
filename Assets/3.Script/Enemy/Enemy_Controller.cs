@@ -18,10 +18,10 @@ public class Enemy_Controller : MonoBehaviour
     private bool isDead;
     public bool IsDead { get => isDead; set => isDead = value; }
 
-    private bool isGround = false;
+    private bool isGround;
 
     private NavMeshAgent agent;
-    
+
 
     private void Awake()
     {
@@ -30,26 +30,27 @@ public class Enemy_Controller : MonoBehaviour
         spawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
     }
 
-
-    private void Update()
+    private void OnEnable()
     {
-        if(!isGround)
+        isGround = false;
+        StartCoroutine(CheckGround());
+    }
+
+
+    private IEnumerator CheckGround()
+    {
+        while(!isGround)
         {
             if (transform.position.y <= 0.1f)
             {
                 agent = GetComponent<NavMeshAgent>();
                 agent.enabled = true;
                 isGround = true;
+                StartCoroutine(Update_target_position_co());
             }
+            yield return null;
         }
-
     }
-
-    private void OnEnable()
-    {
-        StartCoroutine(Update_target_position_co());        
-    }
-
 
     public void SetupData(Enemy_Data data)
     {
@@ -84,17 +85,13 @@ public class Enemy_Controller : MonoBehaviour
 
     private IEnumerator Update_target_position_co()
     {
-        while (isGround == true)
+        while (isGround == true && player != null)
         {
-            if (player != null)
-            {
-                Debug.Log("들어오긴하나");
-                agent.isStopped = false;
-                agent.SetDestination(player.transform.position);
-                yield return null;
-            }
+            agent.isStopped = false;
+            agent.SetDestination(player.transform.position);
+            yield return null;
         }
     }
 
-    
+
 }
