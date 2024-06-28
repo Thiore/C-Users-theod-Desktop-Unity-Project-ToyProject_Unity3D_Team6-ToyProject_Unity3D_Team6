@@ -11,6 +11,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private BoxCollider meleeArea;
     [SerializeField] private GameObject trailEffect;
 
+    public int Damage { get => damage; }
+
     public void Use()
     {
         if (type == Type.Melee)

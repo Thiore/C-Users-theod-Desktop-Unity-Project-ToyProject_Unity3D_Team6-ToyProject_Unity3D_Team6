@@ -72,6 +72,26 @@ public class Enemy_Controller : MonoBehaviour
         agent.speed = data.speed;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Melee"))
+        {
+            Debug.Log("처맞음");
+            OnDamage(collision.transform.GetComponent<Weapon>().Damage);
+        }
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.CompareTag("Melee"))
+        {
+            Debug.Log("처맞음");
+            OnDamage(other.transform.GetComponent<Weapon>().Damage);
+        }
+    }
+
+
     public void OnDamage(int damage)
     {
         CurrentHp -= damage;
@@ -87,6 +107,7 @@ public class Enemy_Controller : MonoBehaviour
         if (!isDead)
         {
             isDead = true;
+            StopCoroutine(Update_target_position_co());
             gameObject.SetActive(false);
             gameObject.transform.position = spawner.transform.position;
             spawner.Enemy_list.Add(this);
@@ -97,7 +118,7 @@ public class Enemy_Controller : MonoBehaviour
 
     private IEnumerator Update_target_position_co()
     {
-        while (isGround == true && player != null)
+        while (isGround == true && isDead == false)
         {
             agent.isStopped = false;
             agent.SetDestination(player.transform.position);
