@@ -28,4 +28,24 @@ public class Enemy_Controller : MonoBehaviour
         damage = data.damage;
        // agent.speed = data.speed;
     }
+
+    public void OnDamage(int damage)
+    {
+        CurrentHp -= damage;
+        if(CurrentHp <= 0 && !isDead)
+        {
+            Die();
+        }
+
+    }
+
+    public void Die()
+    {
+        if (isDead)
+        {
+            isDead = true;
+        }
+    }
+
+
 }
