@@ -27,7 +27,8 @@ public class Player_Move : MonoBehaviour
     private bool isRolling = false;
     private bool isDazed = false;
     private bool isAttacking = false; // 공격 중 상태 변수 추가
-
+    private bool isColliding = false; // 충돌 상태 변수 추가
+    private float add = 50f;
     Vector3 moveVec;
     Vector3 RollingForward;
 
@@ -88,9 +89,8 @@ public class Player_Move : MonoBehaviour
             {
                 // 구르는 동안 이동 업데이트
                 DecreaseRollSpeed -= Time.deltaTime * 30f;
-                Vector3 movePos = transform.position;
-                movePos += RollingForward * moveVec.z * DecreaseRollSpeed * Time.deltaTime;
-                transform.position = movePos;
+                Vector3 movePos = transform.position + RollingForward * moveVec.z * DecreaseRollSpeed * Time.deltaTime;
+                player_r.MovePosition(movePos);
                 return; // 구르는 동안에는 다른 입력을 처리하지 않음
             }
         }
@@ -99,6 +99,12 @@ public class Player_Move : MonoBehaviour
         if (isAttacking)
         {
             return; // 공격 중에는 다른 입력을 처리하지 않음
+        }
+
+        // 충돌 중일 때
+        if (isColliding)
+        {
+            return; // 충돌 중에는 다른 입력을 처리하지 않음
         }
 
         Attack(); // 공격 처리
@@ -124,14 +130,9 @@ public class Player_Move : MonoBehaviour
         // 플레이어 위치 업데이트
         if (moveVec != Vector3.zero)
         {
-            #region 재현
-            //transform.position += moveVec * speed * Time.deltaTime;
-            #endregion
-            #region 영훈
-            Vector3 movePos = transform.position;
-            movePos += transform.right * moveVec.x * speed * Time.deltaTime + transform.forward * moveVec.z * speed * Time.deltaTime;
-            transform.position = movePos;
-            #endregion
+            Vector3 moveDir = transform.right * moveVec.x + transform.forward * moveVec.z;
+            Vector3 movePos = transform.position + moveDir * speed * Time.deltaTime;
+            player_r.MovePosition(movePos);
             playerAnimator.SetBool("isWalking", true);
         }
         else
@@ -161,28 +162,8 @@ public class Player_Move : MonoBehaviour
         // 구르는 중이나 Dazed 상태에서는 회전하지 않음
         if (isRolling || isDazed || isAttacking) return; // 공격 중에도 회전하지 않음
 
-        #region 재현
-        // 마우스 위치를 월드 좌표로 가져오기
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //if (Physics.Raycast(ray, out RaycastHit hit))
-        //{
-        //    Vector3 target = hit.point;
-        //    target.y = transform.position.y; // y 좌표는 플레이어와 동일하게 유지
-        //    Vector3 direction = (target - transform.position).normalized;
-
-        //    if (direction != Vector3.zero)
-        //    {
-        //        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        //        // 플레이어 회전 업데이트 (부드럽게 회전)
-        //        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * speed);
-        //    }
-        //}
-        #endregion
-
-        #region 영훈
         float mouseX = Input.GetAxis("Mouse X");
         transform.Rotate(transform.up, mouseX * Time.deltaTime * MouseSpeed);
-        #endregion 
     }
 
     private void StartRolling()
@@ -221,5 +202,29 @@ public class Player_Move : MonoBehaviour
         // 애니메이션 길이만큼 대기
         yield return new WaitForSeconds(playerAnimator.GetCurrentAnimatorStateInfo(0).length);
         isAttacking = false; // 공격 종료
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // 충돌한 오브젝트가 prop 태그를 가지고 있는지 확인
+        if (collision.gameObject.CompareTag("prop"))
+        {
+            Debug.Log("충돌");
+
+            // 플레이어의 진행 방향을 계산하여 반대로 힘을 가함
+            Vector3 collisionDirection = -player_r.velocity.normalized;
+            player_r.AddForce(collisionDirection * add, ForceMode.Impulse);
+
+            // 충돌 상태 설정 및 Dazed 시작
+            isColliding = true;
+            StartDazed();
+            StartCoroutine(EndCollisionAfterDaze());
+        }
+    }
+
+    private IEnumerator EndCollisionAfterDaze()
+    {
+        yield return new WaitForSeconds(dazeDuration);
+        isColliding = false;
     }
 }
