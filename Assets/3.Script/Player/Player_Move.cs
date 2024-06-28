@@ -17,8 +17,9 @@ public class Player_Move : MonoBehaviour
     [SerializeField] private AudioClip swing_sound;
     [SerializeField] private AudioClip crash_sound;
     [SerializeField] private AudioClip roll_sound;
+    [SerializeField] private AudioClip walk_sound;
+    [SerializeField] private AudioClip run_sound;
     #endregion
-
 
     #region 클래스 변수
     private float speed;
@@ -46,6 +47,8 @@ public class Player_Move : MonoBehaviour
     private Rigidbody player_r;
 
     private Player_Health player_Health;
+
+    private Coroutine movementSoundCoroutine;
 
     private void Start()
     {
@@ -100,7 +103,7 @@ public class Player_Move : MonoBehaviour
                 DecreaseRollSpeed -= Time.deltaTime * 30f;
                 Vector3 movePos = transform.position + RollingForward * moveVec.z * DecreaseRollSpeed * Time.deltaTime;
                 player_r.MovePosition(movePos);
-                
+
                 return; // 구르는 동안에는 다른 입력을 처리하지 않음
             }
         }
@@ -116,8 +119,6 @@ public class Player_Move : MonoBehaviour
         {
             return; // 충돌 중에는 다른 입력을 처리하지 않음
         }
-
-        Attack(); // 공격 처리
 
         // 이동 입력 받기
         hAxis = Input.GetAxisRaw("Horizontal");
@@ -144,10 +145,21 @@ public class Player_Move : MonoBehaviour
             Vector3 movePos = transform.position + moveDir * speed * Time.deltaTime;
             player_r.MovePosition(movePos);
             playerAnimator.SetBool("isWalking", true);
+
+            if (movementSoundCoroutine == null)
+            {
+                movementSoundCoroutine = StartCoroutine(PlayMovementSound());
+            }
         }
         else
         {
             playerAnimator.SetBool("isWalking", false);
+
+            if (movementSoundCoroutine != null)
+            {
+                StopCoroutine(movementSoundCoroutine);
+                movementSoundCoroutine = null;
+            }
         }
 
         // Space Bar를 누르면 구르기 시작
@@ -158,7 +170,7 @@ public class Player_Move : MonoBehaviour
             DecreaseRollSpeed = rollSpeed;
             StartRolling();
         }
-
+        Attack(); // 공격 처리
         // 마우스 위치를 향해 플레이어 회전
         RotatePlayerToMouse();
     }
@@ -202,11 +214,10 @@ public class Player_Move : MonoBehaviour
             equiaWeapon.Use();
             playerAnimator.SetTrigger("DoSwing");
             fireDelay = 0;
-            
 
+            player_audio.PlayOneShot(swing_sound);
             // 공격 애니메이션이 끝날 때까지 대기
             StartCoroutine(EndAttackAfterAnimation());
-            player_audio.PlayOneShot(swing_sound);
         }
     }
 
@@ -240,5 +251,22 @@ public class Player_Move : MonoBehaviour
     {
         yield return new WaitForSeconds(dazeDuration);
         isColliding = false;
+    }
+
+    private IEnumerator PlayMovementSound()
+    {
+        while (true)
+        {
+            if (speed == runSpeed)
+            {
+                player_audio.PlayOneShot(run_sound);
+                yield return new WaitForSeconds(run_sound.length);
+            }
+            else
+            {
+                player_audio.PlayOneShot(walk_sound);
+                yield return new WaitForSeconds(0.8f);
+            }
+        }
     }
 }
