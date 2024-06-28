@@ -57,5 +57,11 @@ public class Enemy_Controller : MonoBehaviour
         }
     }
 
+    private IEnumerator Update_tartget_position_co()
+    {
+        while(!isDead)
+        {
 
+        }
+    }
 }
