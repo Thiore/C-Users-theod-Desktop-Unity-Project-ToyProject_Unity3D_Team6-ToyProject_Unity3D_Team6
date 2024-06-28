@@ -71,6 +71,7 @@ public class EnemySpawner : MonoBehaviour
 
         Enemy_Controller enemy = Instantiate(enemy_Controllers[index], transform.position, Quaternion.identity);
         enemy.SetupData(data);
+        enemy.Agent.enabled = false;
         enemy_list.Add(enemy);
         enemy.gameObject.SetActive(false);
     }

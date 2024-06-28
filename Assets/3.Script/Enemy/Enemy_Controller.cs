@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.AI;
@@ -20,14 +21,16 @@ public class Enemy_Controller : MonoBehaviour
 
     private bool isGround;
 
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
+    public NavMeshAgent Agent { get => agent; protected set => agent = value; }
 
 
     private void Awake()
     {
         isDead = false;
-        player = GameObject.Find("Player").transform.GetComponent<Player_Controller>();
+        player = FindObjectOfType<Player_Controller>();
         spawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     private void OnEnable()
@@ -36,6 +39,10 @@ public class Enemy_Controller : MonoBehaviour
         StartCoroutine(CheckGround());
     }
 
+    private void Update()
+    {
+
+    }
 
     private IEnumerator CheckGround()
     {
@@ -43,10 +50,15 @@ public class Enemy_Controller : MonoBehaviour
         {
             if (transform.position.y <= 0.1f)
             {
-                agent = GetComponent<NavMeshAgent>();
                 agent.enabled = true;
                 isGround = true;
+                transform.rotation = Quaternion.identity;
                 StartCoroutine(Update_target_position_co());
+            }
+            else
+            {
+                Vector3 direction = (player.transform.position - transform.position).normalized;
+                transform.position += direction * agent.speed * Time.deltaTime;
             }
             yield return null;
         }
@@ -57,7 +69,7 @@ public class Enemy_Controller : MonoBehaviour
         MaxHp = data.MaxHp;
         CurrentHp = data.MaxHp;
         damage = data.damage;
-        // agent.speed = data.speed;
+        agent.speed = data.speed;
     }
 
     public void OnDamage(int damage)
