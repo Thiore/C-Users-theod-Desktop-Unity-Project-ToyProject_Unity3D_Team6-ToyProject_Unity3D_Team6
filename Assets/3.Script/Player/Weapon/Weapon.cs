@@ -10,6 +10,10 @@ public class Weapon : MonoBehaviour
     [SerializeField] public float rate;
     [SerializeField] private BoxCollider meleeArea;
     [SerializeField] private GameObject trailEffect;
+    public Transform bulletPoistion;
+    public GameObject bullet;
+    public Transform bulletCasePosition;
+    public GameObject bulletCase;
 
     public void Use()
     {

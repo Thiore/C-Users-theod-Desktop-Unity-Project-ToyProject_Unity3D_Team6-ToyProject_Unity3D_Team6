@@ -107,7 +107,7 @@ public class Player_Move : MonoBehaviour
             return; // 충돌 중에는 다른 입력을 처리하지 않음
         }
 
-        Attack(); // 공격 처리
+        //Attack(); // 공격 처리
 
         // 이동 입력 받기
         hAxis = Input.GetAxisRaw("Horizontal");
@@ -180,22 +180,21 @@ public class Player_Move : MonoBehaviour
         playerAnimator.SetBool("isDazed", true);
     }
 
-    private void Attack()
-    {
-        fireDelay += Time.deltaTime;
-        isFireReady = equiaWeapon.rate < fireDelay;
+    //private void Attack()
+    //{
+    //    fireDelay += Time.deltaTime;
+    //    isFireReady = equiaWeapon.rate < fireDelay;
+    //    if (fdown && isFireReady && !isRolling && !isDazed)
+    //    {
+    //        isAttacking = true; // 공격 시작
+    //        equiaWeapon.Use();
+    //        playerAnimator.SetTrigger("DoShot");
+    //        fireDelay = 0;
 
-        if (fdown && isFireReady && !isRolling && !isDazed)
-        {
-            isAttacking = true; // 공격 시작
-            equiaWeapon.Use();
-            playerAnimator.SetTrigger("DoSwing");
-            fireDelay = 0;
-
-            // 공격 애니메이션이 끝날 때까지 대기
-            StartCoroutine(EndAttackAfterAnimation());
-        }
-    }
+    //        // 공격 애니메이션이 끝날 때까지 대기
+    //        StartCoroutine(EndAttackAfterAnimation());
+    //    }
+    //}
 
     private IEnumerator EndAttackAfterAnimation()
     {
