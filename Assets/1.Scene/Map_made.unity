@@ -17931,13 +17931,26 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 950689807645941349}
+  - component: {fileID: 346306627869775079}
   m_Layer: 6
-  m_Name: Luna
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &346306627869775079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346306627869775078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 188ad9caa6218dd428db6ea0b18ab237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &385192420426858877
 MeshRenderer:
   m_ObjectHideFlags: 0
