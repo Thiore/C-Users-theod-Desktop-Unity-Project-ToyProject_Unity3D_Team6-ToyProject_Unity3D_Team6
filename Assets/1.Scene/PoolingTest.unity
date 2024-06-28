@@ -512,14 +512,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy_datas:
   - {fileID: 11400000, guid: 3c2d5e54f36238e469545452747c0293, type: 2}
-  - {fileID: 11400000, guid: 65ef72d50ad02e549929ce849ff44e4f, type: 2}
   - {fileID: 11400000, guid: 68597fe9974c2c04abbadfc0372fbcb5, type: 2}
+  - {fileID: 11400000, guid: 65ef72d50ad02e549929ce849ff44e4f, type: 2}
   - {fileID: 11400000, guid: d898fa943e0c1154a8fb12d9ff47e830, type: 2}
-  enemy_common: {fileID: 0}
   minPoint: {fileID: 1935920722}
   maxPoint: {fileID: 106088798}
   enemy_Controllers:
   - {fileID: 2612850798129968292, guid: e5457d98ae6a4ab468c8dfa5ea0adea7, type: 3}
+  - {fileID: 5411566047356910439, guid: 3a4c3bc1d26d13345a8cd6916c32fc11, type: 3}
+  - {fileID: -8020496510428032127, guid: d26f576ac5ac1bf47a7221adf66e193a, type: 3}
+  - {fileID: -8100054054327930038, guid: e26e0a25e316d6b4bb18d80975b5b61b, type: 3}
 --- !u!4 &1436297041
 Transform:
   m_ObjectHideFlags: 0
@@ -528,7 +530,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436297039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1935920722}

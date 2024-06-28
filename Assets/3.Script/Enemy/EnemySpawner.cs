@@ -69,5 +69,10 @@ public class EnemySpawner : MonoBehaviour
         enemy.gameObject.SetActive(false);
     }
 
+    private void DropEnemy()
+    {
+
+    }
+
 
 }
