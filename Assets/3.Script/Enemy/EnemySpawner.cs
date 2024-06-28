@@ -20,18 +20,17 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Enemy_Controller[] enemy_Controllers;
     private List<Enemy_Controller> enemy_list = new List<Enemy_Controller>();
 
+    public List<Enemy_Controller> Enemy_list { get => enemy_list; }
+
 
     private void Awake()
     {
         Setup_Enemy_co();
-
-
     }
 
-
-    private void Start()
+    private void OnEnable()
     {
-        StartCoroutine(DropEnemy_co());
+        StartCoroutine(DropEnemy_co());        
     }
 
 
@@ -72,6 +71,7 @@ public class EnemySpawner : MonoBehaviour
 
         Enemy_Controller enemy = Instantiate(enemy_Controllers[index], transform.position, Quaternion.identity);
         enemy.SetupData(data);
+        enemy.Agent.enabled = false;
         enemy_list.Add(enemy);
         enemy.gameObject.SetActive(false);
     }
@@ -88,11 +88,9 @@ public class EnemySpawner : MonoBehaviour
 
                 enemy.transform.position = Setup_SpawnPoint();
                 enemy.gameObject.SetActive(true);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(1.5f);
             }
-        }
-
-        
+        }    
     }
 
 

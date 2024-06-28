@@ -32,7 +32,7 @@ public class Player_Health : MonoBehaviour
         // 여기서 플레이어 사망 시 처리를 추가할 수 있습니다. 예: 게임 오버 화면 표시, 플레이어 비활성화 등
         playerAnimator.SetTrigger("Die");
         isDie = true;
-        
+
     }
 
     private void OnCollisionEnter(Collision collision)
