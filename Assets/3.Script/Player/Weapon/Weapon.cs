@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     private enum Type { Melee, Range}
-    [SerializeField]private Type type;
+    [SerializeField] private Type type;
     [SerializeField] private int damage;
     [SerializeField] public float rate;
     [SerializeField] private BoxCollider meleeArea;
