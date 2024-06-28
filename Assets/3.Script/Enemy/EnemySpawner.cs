@@ -24,9 +24,16 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         Setup_Enemy_co();
-        
+
+
     }
-    
+
+
+    private void Start()
+    {
+        StartCoroutine(DropEnemy_co());
+    }
+
 
     private Vector3 Setup_SpawnPoint()
     {
@@ -34,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
         spawnX = Random.Range(minPoint.position.x, maxPoint.position.x);
         spawnZ = Random.Range(minPoint.position.z, maxPoint.position.z);
 
-        spawnPoint = new Vector3(spawnX, 50f, spawnZ);
+        spawnPoint = new Vector3(spawnX, 60f, spawnZ);
         return spawnPoint;
     }
 
@@ -69,9 +76,23 @@ public class EnemySpawner : MonoBehaviour
         enemy.gameObject.SetActive(false);
     }
 
-    private void DropEnemy()
+    private IEnumerator DropEnemy_co()
     {
+        while (true)
+        {
+            if(enemy_list.Count >= 0)
+            {
+                int index = Random.Range(0, enemy_list.Count);
+                var enemy = enemy_list[index];
+                enemy_list.RemoveAt(index);
 
+                enemy.transform.position = Setup_SpawnPoint();
+                enemy.gameObject.SetActive(true);
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+
+        
     }
 
 
