@@ -5,8 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - Melee
-  - prop
   layers:
   - Default
   - TransparentFX
@@ -14,8 +12,8 @@ TagManager:
   - 
   - Water
   - UI
-  - Melee
   - Player
+  - 
   - 
   - 
   - 
