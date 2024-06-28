@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player_Move : MonoBehaviour
 {
-    [SerializeField] public float walkSpeed = 15f;
-    [SerializeField] public float runSpeed = 30f;
+    [SerializeField] public float walkSpeed = 100f;
+    [SerializeField] public float runSpeed = 150f;
     private float speed;
     private float hAxis;
     private float vAxis;
