@@ -9,12 +9,18 @@ public class Player_Move : MonoBehaviour
     [SerializeField] public float rollSpeed = 100f;
     [SerializeField] public float rollDuration = 0.5f;
     [SerializeField] public float dazeDuration = 0.5f; // 이동을 못하는 시간
+    private AudioSource player_audio;
 
     #region 영훈 / 마우스 감도
     [Range(100, 1000)]
     [SerializeField] public float MouseSpeed = 500f;
+    [SerializeField] private AudioClip swing_sound;
+    [SerializeField] private AudioClip crash_sound;
+    [SerializeField] private AudioClip roll_sound;
     #endregion
 
+
+    #region 클래스 변수
     private float speed;
     private float DecreaseRollSpeed;
     private float hAxis;
@@ -29,6 +35,8 @@ public class Player_Move : MonoBehaviour
     private bool isAttacking = false; // 공격 중 상태 변수 추가
     private bool isColliding = false; // 충돌 상태 변수 추가
     private float add = 50f;
+    #endregion
+
     Vector3 moveVec;
     Vector3 RollingForward;
 
@@ -45,6 +53,7 @@ public class Player_Move : MonoBehaviour
         playerAnimator = GetComponentInChildren<Animator>();
         player_r = GetComponent<Rigidbody>();
         player_Health = GetComponent<Player_Health>();
+        player_audio = GetComponent<AudioSource>();
         if (playerAnimator == null)
         {
             Debug.LogError("Animator component not found in children.");
@@ -91,6 +100,7 @@ public class Player_Move : MonoBehaviour
                 DecreaseRollSpeed -= Time.deltaTime * 30f;
                 Vector3 movePos = transform.position + RollingForward * moveVec.z * DecreaseRollSpeed * Time.deltaTime;
                 player_r.MovePosition(movePos);
+                
                 return; // 구르는 동안에는 다른 입력을 처리하지 않음
             }
         }
@@ -143,6 +153,7 @@ public class Player_Move : MonoBehaviour
         // Space Bar를 누르면 구르기 시작
         if (Input.GetKeyDown(KeyCode.Space) && moveVec != Vector3.zero)
         {
+            player_audio.PlayOneShot(roll_sound);
             RollingForward = transform.forward;
             DecreaseRollSpeed = rollSpeed;
             StartRolling();
@@ -191,9 +202,11 @@ public class Player_Move : MonoBehaviour
             equiaWeapon.Use();
             playerAnimator.SetTrigger("DoSwing");
             fireDelay = 0;
+            
 
             // 공격 애니메이션이 끝날 때까지 대기
             StartCoroutine(EndAttackAfterAnimation());
+            player_audio.PlayOneShot(swing_sound);
         }
     }
 
@@ -214,6 +227,7 @@ public class Player_Move : MonoBehaviour
             // 플레이어의 진행 방향을 계산하여 반대로 힘을 가함
             Vector3 collisionDirection = -player_r.velocity.normalized;
             player_r.AddForce(collisionDirection * add, ForceMode.Impulse);
+            player_audio.PlayOneShot(crash_sound);
 
             // 충돌 상태 설정 및 Dazed 시작
             isColliding = true;
