@@ -4941,6 +4941,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 37203031545146444, guid: 6c7fd7ecd95d35b41a5334bce82deb86, type: 3}
+      propertyPath: runSpeed
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 37203031545146444, guid: 6c7fd7ecd95d35b41a5334bce82deb86, type: 3}
+      propertyPath: rollSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 37203031545146444, guid: 6c7fd7ecd95d35b41a5334bce82deb86, type: 3}
+      propertyPath: walkSpeed
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 37203031545146445, guid: 6c7fd7ecd95d35b41a5334bce82deb86, type: 3}
       propertyPath: m_RootOrder
       value: 3
