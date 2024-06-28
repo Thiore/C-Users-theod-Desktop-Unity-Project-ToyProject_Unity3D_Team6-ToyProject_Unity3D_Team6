@@ -8,16 +8,21 @@ public class Player_Move : MonoBehaviour
     [SerializeField] public float runSpeed = 150f;
     [SerializeField] public float rollSpeed = 200f;
     [SerializeField] public float rollDuration = 0.5f;
-    [SerializeField] public float dazeDuration = 0.5f; // 이동을 못하는 시간
+    [SerializeField] public float dazeDuration = 0.5f; // 이동을 못하는 시
 
     private float speed;
     private float hAxis;
     private float vAxis;
+    private bool fdown;
+    private bool isFireReady;
+    private float fireDelay;
     private bool isRolling = false;
     private bool isDazed = false;
     private float rollStartTime;
     private float dazeStartTime;
     Vector3 moveVec;
+
+    [SerializeField] private Weapon equiaWeapon;
 
     private Animator playerAnimator;
 
@@ -68,9 +73,12 @@ public class Player_Move : MonoBehaviour
             }
         }
 
+        Attack();
+
         // 이동 입력 받기
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
+        fdown = Input.GetButtonDown("Fire1");
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
         // 속도 조정 (Shift 키 입력에 따라)
@@ -140,5 +148,18 @@ public class Player_Move : MonoBehaviour
         isDazed = true;
         dazeStartTime = Time.time;
         playerAnimator.SetBool("isDazed", true);
+    }
+
+    private void Attack()
+    {
+        fireDelay += Time.deltaTime;
+        isFireReady = equiaWeapon.rate < fireDelay;
+
+        if (fdown && isFireReady&&!(isRolling&&isDazed))
+        {
+            equiaWeapon.Use();
+            playerAnimator.SetTrigger("DoSwing");
+            fireDelay = 0;
+        }
     }
 }
