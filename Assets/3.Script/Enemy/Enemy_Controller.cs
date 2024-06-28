@@ -21,6 +21,16 @@ public class Enemy_Controller : MonoBehaviour
         isDead = false;
     }
 
+    private void Update()
+    {
+        if(transform.position.y <= 0.1f)
+        {
+            agent = GetComponent<NavMeshAgent>();
+            agent.enabled = true;
+        }
+
+    }
+
     public void SetupData(Enemy_Data data)
     {
         MaxHp = data.MaxHp;
