@@ -273,6 +273,7 @@ public class Player_Gunner : MonoBehaviour
             equipWeapon.Use();
             playerAnimator.SetTrigger("doShot");
             fireDelay = 0;
+            StartCoroutine(EndAttackAfterAnimation());
         }
     }
     //private void Attack()

@@ -180,6 +180,8 @@ MonoBehaviour:
   bullet: {fileID: 6294464128569789216, guid: 4eca88b1b85ac134ebb50290b696eca0, type: 3}
   bulletCasePosition: {fileID: 256300681}
   bulletCase: {fileID: 8979891007472082718, guid: 983c364e899aa0a4d9ae4f91f7ada255, type: 3}
+  bulletPrefab: {fileID: 6294464128569789216, guid: 4eca88b1b85ac134ebb50290b696eca0, type: 3}
+  bulletCasePrefab: {fileID: 8979891007472082718, guid: 983c364e899aa0a4d9ae4f91f7ada255, type: 3}
 --- !u!1 &256300680
 GameObject:
   m_ObjectHideFlags: 0
@@ -1059,6 +1061,8 @@ MonoBehaviour:
   bullet: {fileID: 1585839105782242845, guid: 5f376f0835d133a4694ede4ec77153b8, type: 3}
   bulletCasePosition: {fileID: 1120550449}
   bulletCase: {fileID: 8979891007472082718, guid: 983c364e899aa0a4d9ae4f91f7ada255, type: 3}
+  bulletPrefab: {fileID: 1585839105782242845, guid: 5f376f0835d133a4694ede4ec77153b8, type: 3}
+  bulletCasePrefab: {fileID: 8979891007472082718, guid: 983c364e899aa0a4d9ae4f91f7ada255, type: 3}
 --- !u!1 &1120550448
 GameObject:
   m_ObjectHideFlags: 0
@@ -2054,7 +2058,7 @@ GameObject:
   - component: {fileID: 1992753738}
   - component: {fileID: 1992753744}
   m_Layer: 0
-  m_Name: Player_Gun
+  m_Name: Luna
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24044,6 +24048,8 @@ MonoBehaviour:
   bullet: {fileID: 0}
   bulletCasePosition: {fileID: 0}
   bulletCase: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  bulletCasePrefab: {fileID: 0}
 --- !u!1 &7964758283460910770
 GameObject:
   m_ObjectHideFlags: 0

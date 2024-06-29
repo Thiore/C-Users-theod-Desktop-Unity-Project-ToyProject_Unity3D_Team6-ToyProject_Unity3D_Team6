@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    private enum Type { Melee, Range}
-    [SerializeField]private Type type;
+    private enum Type { Melee, Range }
+    [SerializeField] private Type type;
     [SerializeField] private int damage;
     [SerializeField] public float rate;
     [SerializeField] private BoxCollider meleeArea;
@@ -16,6 +16,23 @@ public class Weapon : MonoBehaviour
     public GameObject bulletCase;
 
     public int Damage { get => damage; }
+
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject bulletCasePrefab;
+    private GameObject[] bulletPool;
+    private int poolSize = 10;
+    private int nextBullet = 0;
+
+    private void Start()
+    {
+        //불렛 초기화
+        bulletPool = new GameObject[poolSize];
+        for (int i = 0; i < poolSize; i++)
+        {
+            bulletPool[i] = Instantiate(bulletPrefab);
+            bulletPool[i].SetActive(false);
+        }
+    }
 
     public void Use()
     {
@@ -39,21 +56,60 @@ public class Weapon : MonoBehaviour
         trailEffect.SetActive(false);
     }
 
+    //private IEnumerator Shot()
+    //{
+    //    //총알 발사
+    //    GameObject instantBullet = Instantiate(bullet, bulletPoistion.position, bulletPoistion.rotation);
+    //        Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
+    //    bulletRigid.velocity = bulletPoistion.forward * 50;
+    //    yield return null;
+
+    //    //탄피
+    //    GameObject instantCase = Instantiate(bulletCase, bulletCasePosition.position, bulletCasePosition.rotation);
+    //    Rigidbody caseaRigid = instantCase.GetComponent<Rigidbody>();
+    //    Vector3 caseVec = bulletCasePosition.forward * Random.Range(-3, -2) + Vector3.up * Random.Range(2, 3);
+    //    caseaRigid.AddForce(caseVec, ForceMode.Impulse);
+    //    caseaRigid.AddTorque(Vector3.up * 10, ForceMode.Impulse);
+    //}
     private IEnumerator Shot()
     {
-        //총알 발사
-        GameObject instantBullet = Instantiate(bullet, bulletPoistion.position, bulletPoistion.rotation);
-            Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
-        bulletRigid.velocity = bulletPoistion.forward * 50;
+        // 오브젝트 풀에서 총알 가져오기
+        GameObject bullet = GetNextBulletFromPool();
+        if (bullet != null)
+        {
+            bullet.transform.position = bulletPoistion.position;
+            bullet.transform.rotation = bulletPoistion.rotation;
+            bullet.SetActive(true);
+
+            // 총알 발사 로직
+            Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
+            bulletRigidbody.velocity = bullet.transform.forward * 50;
+        }
+
+        // 탄피 발사 로직
+        GameObject bulletCase = Instantiate(bulletCasePrefab, bulletCasePosition.position, bulletCasePosition.rotation);
+        Rigidbody caseRigidbody = bulletCase.GetComponent<Rigidbody>();
+        Vector3 caseForce = bulletCasePosition.forward * Random.Range(-3, -2) + Vector3.up * Random.Range(2, 3);
+        caseRigidbody.AddForce(caseForce, ForceMode.Impulse);
+        caseRigidbody.AddTorque(Vector3.up * 10, ForceMode.Impulse);
+
         yield return null;
-
-        //탄피
-        GameObject instantCase = Instantiate(bulletCase, bulletCasePosition.position, bulletCasePosition.rotation);
-        Rigidbody caseaRigid = instantCase.GetComponent<Rigidbody>();
-        Vector3 caseVec = bulletCasePosition.forward * Random.Range(-3, -2) + Vector3.up * Random.Range(2, 3);
-        caseaRigid.AddForce(caseVec, ForceMode.Impulse);
-        caseaRigid.AddTorque(Vector3.up * 10, ForceMode.Impulse);
     }
-    
 
+    private GameObject GetNextBulletFromPool()
+    {
+        // 다음 사용할 총알을 풀에서 가져오기
+        GameObject bullet = bulletPool[nextBullet];
+        nextBullet = (nextBullet + 1) % poolSize;
+        return bullet;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        // 총알이 땅에 충돌했을 때 비활성화 처리
+        if (collision.gameObject.CompareTag("prop"))
+        {
+            gameObject.SetActive(false); // 현재 총알을 비활성화
+                                         
+        }
+    }
 }
