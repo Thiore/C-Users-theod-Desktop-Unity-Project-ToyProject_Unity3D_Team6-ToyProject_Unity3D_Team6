@@ -1742,7 +1742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1509416925549156319, guid: a2e051660762cbe4494c17a095a95e10, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2285952976136801637, guid: a2e051660762cbe4494c17a095a95e10, type: 3}
       propertyPath: m_RootOrder
@@ -1939,9 +1939,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1992753736}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 188ad9caa6218dd428db6ea0b18ab237, type: 3}
+  m_Script: {fileID: 11500000, guid: da8b3fd45be3ea44587ece847d26b0f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
+  damage: 0
+  rate: 0
+  meleeArea: {fileID: 0}
+  trailEffect: {fileID: 0}
+  bulletPoistion: {fileID: 0}
+  bullet: {fileID: 0}
+  bulletCasePosition: {fileID: 0}
+  bulletCase: {fileID: 0}
 --- !u!82 &1992753738
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2141,8 +2150,8 @@ MonoBehaviour:
   MouseSpeed: 685
   swing_sound: {fileID: 0}
   crash_sound: {fileID: 0}
-  roll_sound: {fileID: 0}
-  walk_sound: {fileID: 8300000, guid: c36fa08ef01a24023aed81ce8c980720, type: 3}
+  roll_sound: {fileID: 8300000, guid: 13182107f288fdc47a11f9216c8f062b, type: 3}
+  walk_sound: {fileID: 8300000, guid: 9f110f013401f42e996da5094d6f8b8b, type: 3}
   run_sound: {fileID: 8300000, guid: 7c27a13555c6947eab6aca916a0f03ed, type: 3}
   equiaWeapon: {fileID: 0}
   weapons:
@@ -23945,6 +23954,10 @@ MonoBehaviour:
   rate: 1
   meleeArea: {fileID: 7964758283460910768}
   trailEffect: {fileID: 37203030481266208}
+  bulletPoistion: {fileID: 0}
+  bullet: {fileID: 0}
+  bulletCasePosition: {fileID: 0}
+  bulletCase: {fileID: 0}
 --- !u!1 &7964758283460910770
 GameObject:
   m_ObjectHideFlags: 0
