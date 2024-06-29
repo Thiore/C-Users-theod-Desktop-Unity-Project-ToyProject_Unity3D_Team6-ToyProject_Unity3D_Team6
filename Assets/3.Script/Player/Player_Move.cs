@@ -203,23 +203,23 @@ public class Player_Move : MonoBehaviour
         playerAnimator.SetBool("isDazed", true);
     }
 
-    //private void Attack()
-    //{
-    //    fireDelay += Time.deltaTime;
-    //    isFireReady = (equiaWeapon.rate < fireDelay);
+    private void Attack()
+    {
+        fireDelay += Time.deltaTime;
+        isFireReady = (equiaWeapon.rate < fireDelay);
 
-    //    if (fdown && isFireReady && !isRolling && !isDazed)
-    //    {
-    //        isAttacking = true; // 공격 시작
-    //        equiaWeapon.Use();
-    //        playerAnimator.SetTrigger("DoSwing");
-    //        fireDelay = 0;
+        if (fdown && isFireReady && !isRolling && !isDazed)
+        {
+            isAttacking = true; // 공격 시작
+            equiaWeapon.Use();
+            playerAnimator.SetTrigger("DoSwing");
+            fireDelay = 0;
 
-    //        player_audio.PlayOneShot(swing_sound);
-    //        // 공격 애니메이션이 끝날 때까지 대기
-    //        StartCoroutine(EndAttackAfterAnimation());
-    //    }
-    //}
+            player_audio.PlayOneShot(swing_sound);
+            // 공격 애니메이션이 끝날 때까지 대기
+            StartCoroutine(EndAttackAfterAnimation());
+        }
+    }
 
     private IEnumerator EndAttackAfterAnimation()
     {

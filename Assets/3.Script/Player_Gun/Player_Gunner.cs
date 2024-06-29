@@ -51,11 +51,12 @@ public class Player_Gunner : MonoBehaviour
     private Coroutine movementSoundCoroutine;
 
     #region 승주 - Gunner
-    public GameObject[] weapons; //스왑 장비들 (HandGun, Submachinegun)
-    bool sDown1; //1번장비
-    bool sDown2; //2번장비
-    GameObject equipWeapon; //기존 장착된 무기 저장 변수
+    public Weapon[] weapons; //스왑 장비들 (HandGun, Submachinegun)
+   private bool sDown1; //1번장비
+    private bool sDown2; //2번장비
+    private Weapon equipWeapon; //기존 장착된 무기 저장 변수
     private bool isSwap = false;
+    //[SerializeField] private Weapon equiWeapon;
     #endregion
 
     private void Start()
@@ -71,6 +72,7 @@ public class Player_Gunner : MonoBehaviour
         }
         equipWeapon = weapons[0];
         speed = walkSpeed;
+        fireDelay = 0;
     }
 
     private void Update()
@@ -131,7 +133,7 @@ public class Player_Gunner : MonoBehaviour
         // 이동 입력 받기
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
-        fdown = Input.GetButtonDown("Fire1");
+        fdown = Input.GetButton("Fire1");
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
         // 속도 조정 (Shift 키 입력에 따라)
@@ -178,7 +180,7 @@ public class Player_Gunner : MonoBehaviour
             DecreaseRollSpeed = rollSpeed;
             StartRolling();
         }
-        //Attack(); // 공격 처리
+        Attack(); // 공격 처리
         // 마우스 위치를 향해 플레이어 회전
         RotatePlayerToMouse();
 
@@ -204,9 +206,9 @@ public class Player_Gunner : MonoBehaviour
         if ((sDown1 || sDown2) && !isDazed)
         {
             //if(equipWeapon.activeSelf)
-                equipWeapon.SetActive(false); //손에 이미 들려있기 때문에
+                equipWeapon.gameObject.SetActive(false); //손에 이미 들려있기 때문에
             equipWeapon = weapons[weaponIndex];
-            equipWeapon.SetActive(true);
+            equipWeapon.gameObject.SetActive(true);
 
             playerAnimator.SetTrigger("doSwap");
 
@@ -252,6 +254,27 @@ public class Player_Gunner : MonoBehaviour
         playerAnimator.SetBool("isDazed", true);
     }
 
+    private void Attack()
+    {
+        if (equipWeapon == null)
+        {
+            return;
+        }
+            //Debug.Log("dd");
+            
+
+        fireDelay += Time.deltaTime;
+        isFireReady = equipWeapon.rate < fireDelay;
+
+        if (fdown && isFireReady && !isDazed && !isSwap)
+        {
+
+            Debug.Log("사용");
+            equipWeapon.Use();
+            playerAnimator.SetTrigger("doShot");
+            fireDelay = 0;
+        }
+    }
     //private void Attack()
     //{
     //    fireDelay += Time.deltaTime;

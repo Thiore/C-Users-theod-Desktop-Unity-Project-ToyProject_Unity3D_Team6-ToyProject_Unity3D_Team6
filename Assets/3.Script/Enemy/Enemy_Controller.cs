@@ -58,7 +58,7 @@ public class Enemy_Controller : MonoBehaviour
             else
             {
                 Vector3 direction = (player.transform.position - transform.position).normalized;
-                transform.position += direction * agent.speed * Time.deltaTime;
+                transform.position += direction * 5f/*agent.speed*/ * Time.deltaTime;
             }
             yield return null;
         }
@@ -74,10 +74,10 @@ public class Enemy_Controller : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.CompareTag("Melee"))
+        
+        if (collision.transform.CompareTag("Bullet"))
         {
-            Debug.Log("Ã³¸ÂÀ½");
-            OnDamage(collision.transform.GetComponent<Weapon>().Damage);
+            OnDamage(collision.transform.GetComponent<Bullet>().Damage);
         }
     }
 

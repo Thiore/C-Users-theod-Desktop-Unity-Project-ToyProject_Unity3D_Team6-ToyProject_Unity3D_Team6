@@ -159,6 +159,87 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 547435428816858648, guid: 203326381d9b54d489646c6c2f61f53a, type: 3}
   m_PrefabInstance: {fileID: 1241424248}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &79792374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79792373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da8b3fd45be3ea44587ece847d26b0f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  damage: 0
+  rate: 0.15
+  meleeArea: {fileID: 0}
+  trailEffect: {fileID: 0}
+  bulletPoistion: {fileID: 269582445}
+  bullet: {fileID: 6294464128569789216, guid: 4eca88b1b85ac134ebb50290b696eca0, type: 3}
+  bulletCasePosition: {fileID: 256300681}
+  bulletCase: {fileID: 8979891007472082718, guid: 983c364e899aa0a4d9ae4f91f7ada255, type: 3}
+--- !u!1 &256300680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 256300681}
+  m_Layer: 0
+  m_Name: Case_position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &256300681
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256300680}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.17, y: 0.657, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1241424249}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &269582444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 269582445}
+  m_Layer: 0
+  m_Name: Bullet_Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &269582445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269582444}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.189, y: 3.11, z: 1.623}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1992753743}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &296795422
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +687,7 @@ GameObject:
   - component: {fileID: 916599269}
   m_Layer: 0
   m_Name: Tile_Center (4)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -957,6 +1038,57 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1509416925549156319, guid: a2e051660762cbe4494c17a095a95e10, type: 3}
   m_PrefabInstance: {fileID: 1815620565}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1110521969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110521968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da8b3fd45be3ea44587ece847d26b0f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  damage: 0
+  rate: 0.5
+  meleeArea: {fileID: 0}
+  trailEffect: {fileID: 0}
+  bulletPoistion: {fileID: 269582445}
+  bullet: {fileID: 1585839105782242845, guid: 5f376f0835d133a4694ede4ec77153b8, type: 3}
+  bulletCasePosition: {fileID: 1120550449}
+  bulletCase: {fileID: 8979891007472082718, guid: 983c364e899aa0a4d9ae4f91f7ada255, type: 3}
+--- !u!1 &1120550448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1120550449}
+  m_Layer: 0
+  m_Name: Case_Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1120550449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120550448}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.14, y: 0.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1815620566}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1138252080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,12 +2048,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1992753743}
-  - component: {fileID: 1992753742}
   - component: {fileID: 1992753741}
   - component: {fileID: 1992753740}
   - component: {fileID: 1992753739}
   - component: {fileID: 1992753738}
-  - component: {fileID: 1992753737}
   - component: {fileID: 1992753744}
   m_Layer: 0
   m_Name: Player_Gun
@@ -1930,27 +2060,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1992753737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1992753736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da8b3fd45be3ea44587ece847d26b0f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  damage: 0
-  rate: 0
-  meleeArea: {fileID: 0}
-  trailEffect: {fileID: 0}
-  bulletPoistion: {fileID: 0}
-  bullet: {fileID: 0}
-  bulletCasePosition: {fileID: 0}
-  bulletCase: {fileID: 0}
 --- !u!82 &1992753738
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2091,30 +2200,6 @@ CapsuleCollider:
   m_Height: 4.44
   m_Direction: 1
   m_Center: {x: 0, y: 2.28, z: 0.24}
---- !u!114 &1992753742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1992753736}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac6891779cf2f9944827080c257aefcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 50
-  runSpeed: 80
-  rollSpeed: 120
-  rollDuration: 0.5
-  dazeDuration: 0.5
-  MouseSpeed: 685
-  swing_sound: {fileID: 8300000, guid: 7053294e066eb1945baa4d9cc9194f15, type: 3}
-  crash_sound: {fileID: 8300000, guid: 34b722ffc09ef4831a89b6502cd42f7e, type: 3}
-  roll_sound: {fileID: 8300000, guid: 13182107f288fdc47a11f9216c8f062b, type: 3}
-  walk_sound: {fileID: 8300000, guid: c36fa08ef01a24023aed81ce8c980720, type: 3}
-  run_sound: {fileID: 8300000, guid: 7c27a13555c6947eab6aca916a0f03ed, type: 3}
-  equiaWeapon: {fileID: 0}
 --- !u!4 &1992753743
 Transform:
   m_ObjectHideFlags: 0
@@ -2127,6 +2212,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1288861903}
+  - {fileID: 269582445}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2153,10 +2239,10 @@ MonoBehaviour:
   roll_sound: {fileID: 8300000, guid: 13182107f288fdc47a11f9216c8f062b, type: 3}
   walk_sound: {fileID: 8300000, guid: 9f110f013401f42e996da5094d6f8b8b, type: 3}
   run_sound: {fileID: 8300000, guid: 7c27a13555c6947eab6aca916a0f03ed, type: 3}
-  equiaWeapon: {fileID: 0}
+  equiaWeapon: {fileID: 1110521969}
   weapons:
-  - {fileID: 1110521968}
-  - {fileID: 79792373}
+  - {fileID: 1110521969}
+  - {fileID: 79792374}
 --- !u!4 &37203030435826053
 Transform:
   m_ObjectHideFlags: 0
@@ -4262,7 +4348,7 @@ GameObject:
   - component: {fileID: 3886392197365605742}
   m_Layer: 0
   m_Name: Tile_Road_End_Edge
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -4280,7 +4366,7 @@ GameObject:
   - component: {fileID: 2262884829094694109}
   m_Layer: 0
   m_Name: Tile_Water
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4520,7 +4606,7 @@ GameObject:
   - component: {fileID: 3886392197762752102}
   m_Layer: 0
   m_Name: Tile_Center (1)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -4539,7 +4625,7 @@ GameObject:
   - component: {fileID: 3886392196884325935}
   m_Layer: 0
   m_Name: Tile_Center
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -4558,7 +4644,7 @@ GameObject:
   - component: {fileID: 3886392196357791515}
   m_Layer: 0
   m_Name: Tile_Center (3)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -4577,7 +4663,7 @@ GameObject:
   - component: {fileID: 3886392197281682306}
   m_Layer: 0
   m_Name: Tile_Center (2)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -6622,7 +6708,7 @@ GameObject:
   - component: {fileID: 3886392197301976231}
   m_Layer: 0
   m_Name: Tile_Edge (2)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -6641,7 +6727,7 @@ GameObject:
   - component: {fileID: 3886392197140729634}
   m_Layer: 0
   m_Name: Tile_Edge (1)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -6660,7 +6746,7 @@ GameObject:
   - component: {fileID: 3886392196138963258}
   m_Layer: 0
   m_Name: Tile_Edge (3)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -6679,7 +6765,7 @@ GameObject:
   - component: {fileID: 3886392197399131122}
   m_Layer: 0
   m_Name: Tile_Edge (4)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -6698,7 +6784,7 @@ GameObject:
   - component: {fileID: 3886392196670412599}
   m_Layer: 0
   m_Name: Tile_Edge
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 40
@@ -11258,7 +11344,7 @@ GameObject:
   - component: {fileID: 3886392196835985208}
   m_Layer: 0
   m_Name: Tile_Center_Foundation (11)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -11277,7 +11363,7 @@ GameObject:
   - component: {fileID: 3886392197112763852}
   m_Layer: 0
   m_Name: Tile_Center_Foundation (18)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -11296,7 +11382,7 @@ GameObject:
   - component: {fileID: 3886392197484704256}
   m_Layer: 0
   m_Name: Tile_Center_Foundation (15)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -11315,7 +11401,7 @@ GameObject:
   - component: {fileID: 3886392197996211760}
   m_Layer: 0
   m_Name: Tile_Center_Foundation (12)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -11334,7 +11420,7 @@ GameObject:
   - component: {fileID: 3886392197394770627}
   m_Layer: 0
   m_Name: Tile_Center_Foundation (19)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -11353,7 +11439,7 @@ GameObject:
   - component: {fileID: 3886392197078346896}
   m_Layer: 0
   m_Name: Tile_Center_Foundation (5)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -11372,7 +11458,7 @@ GameObject:
   - component: {fileID: 3886392197879747603}
   m_Layer: 0
   m_Name: Tile_Center_Foundation (6)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -11391,7 +11477,7 @@ GameObject:
   - component: {fileID: 3886392197917068876}
   m_Layer: 0
   m_Name: Tile_Center_Foundation (16)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -11410,7 +11496,7 @@ GameObject:
   - component: {fileID: 3886392196408195709}
   m_Layer: 0
   m_Name: Tile_Center_Foundation (10)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -11429,7 +11515,7 @@ GameObject:
   - component: {fileID: 3886392197886743401}
   m_Layer: 0
   m_Name: Tile_Center_Foundation (8)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -11448,7 +11534,7 @@ GameObject:
   - component: {fileID: 3886392198166130016}
   m_Layer: 0
   m_Name: Tile_Center_Foundation (7)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -11467,7 +11553,7 @@ GameObject:
   - component: {fileID: 3886392196184834992}
   m_Layer: 0
   m_Name: Tile_Center_Foundation (17)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -11486,7 +11572,7 @@ GameObject:
   - component: {fileID: 3886392196470395418}
   m_Layer: 0
   m_Name: Tile_Center_Foundation (14)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -11505,7 +11591,7 @@ GameObject:
   - component: {fileID: 3886392197701372143}
   m_Layer: 0
   m_Name: Tile_Center_Foundation (9)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -11524,7 +11610,7 @@ GameObject:
   - component: {fileID: 3886392198111739294}
   m_Layer: 0
   m_Name: Tile_Center_Foundation (13)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -11735,7 +11821,7 @@ GameObject:
   - component: {fileID: 3886392197571046975}
   m_Layer: 0
   m_Name: Tile_Road_Edge_End_Solo
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -12366,7 +12452,7 @@ GameObject:
   - component: {fileID: 3886392197704706279}
   m_Layer: 0
   m_Name: Tile_Road_Solo (2)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -12385,7 +12471,7 @@ GameObject:
   - component: {fileID: 3886392197392416613}
   m_Layer: 0
   m_Name: Tile_Road_Solo (3)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -12404,7 +12490,7 @@ GameObject:
   - component: {fileID: 3886392196956200956}
   m_Layer: 0
   m_Name: Tile_Road_Solo
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -12423,7 +12509,7 @@ GameObject:
   - component: {fileID: 3886392196974257937}
   m_Layer: 0
   m_Name: Tile_Road_Solo (1)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -23665,7 +23751,7 @@ GameObject:
   - component: {fileID: 3886392196555775317}
   m_Layer: 0
   m_Name: Tile_Road_Inner_Corner_3_Edge
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -23754,7 +23840,7 @@ GameObject:
   - component: {fileID: 3886392197472417378}
   m_Layer: 0
   m_Name: Tile_Corner (5)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -23773,7 +23859,7 @@ GameObject:
   - component: {fileID: 3886392197003901187}
   m_Layer: 0
   m_Name: Tile_Corner
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -23792,7 +23878,7 @@ GameObject:
   - component: {fileID: 3886392197952960811}
   m_Layer: 0
   m_Name: Tile_Corner (1)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -23811,7 +23897,7 @@ GameObject:
   - component: {fileID: 3886392197629831727}
   m_Layer: 0
   m_Name: Tile_Corner (6)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -23830,7 +23916,7 @@ GameObject:
   - component: {fileID: 3886392197728578474}
   m_Layer: 0
   m_Name: Tile_Corner (2)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -23849,7 +23935,7 @@ GameObject:
   - component: {fileID: 3886392197159703983}
   m_Layer: 0
   m_Name: Tile_Corner (3)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -24511,7 +24597,7 @@ GameObject:
   - component: {fileID: 3886392197084884831}
   m_Layer: 0
   m_Name: Tile_Road_Solo_Corner
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -24530,7 +24616,7 @@ GameObject:
   - component: {fileID: 3886392197220610710}
   m_Layer: 0
   m_Name: Tile_Road_Solo_Corner (1)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8

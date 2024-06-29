@@ -24,6 +24,10 @@ public class Weapon : MonoBehaviour
             StopCoroutine("Swing");
             StartCoroutine("Swing");
         }
+        else if (type == Type.Range)
+        {
+            StartCoroutine("Shot");
+        }
     }
 
     private IEnumerator Swing()
@@ -34,5 +38,22 @@ public class Weapon : MonoBehaviour
         meleeArea.enabled = false;
         trailEffect.SetActive(false);
     }
+
+    private IEnumerator Shot()
+    {
+        //ÃÑ¾Ë ¹ß»ç
+        GameObject instantBullet = Instantiate(bullet, bulletPoistion.position, bulletPoistion.rotation);
+            Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
+        bulletRigid.velocity = bulletPoistion.forward * 50;
+        yield return null;
+
+        //ÅºÇÇ
+        GameObject instantCase = Instantiate(bulletCase, bulletCasePosition.position, bulletCasePosition.rotation);
+        Rigidbody caseaRigid = instantCase.GetComponent<Rigidbody>();
+        Vector3 caseVec = bulletCasePosition.forward * Random.Range(-3, -2) + Vector3.up * Random.Range(2, 3);
+        caseaRigid.AddForce(caseVec, ForceMode.Impulse);
+        caseaRigid.AddTorque(Vector3.up * 10, ForceMode.Impulse);
+    }
+    
 
 }
