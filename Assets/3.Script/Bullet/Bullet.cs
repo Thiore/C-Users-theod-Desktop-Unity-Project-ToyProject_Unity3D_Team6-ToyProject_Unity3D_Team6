@@ -7,23 +7,23 @@ public class Bullet : MonoBehaviour
     public int damage;
     public int Damage { get => damage; }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.tag == "prop") 
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //    else if (collision.gameObject.tag == "Floor")
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //    else if (collision.gameObject.tag == "Enemy")
-    //    {
-    //        Debug.Log("±¦Âú´Ï?...");
-    //        Destroy(gameObject);
-    //    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "prop")
+        {
+            gameObject.SetActive(false);
+        }
+        else if (collision.gameObject.tag == "Floor")
+        {
+            gameObject.SetActive(false);
+        }
+        else if (collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log("±¦Âú´Ï?...");
+            gameObject.SetActive(false);
+        }
 
 
 
-    //}
+    }
 }

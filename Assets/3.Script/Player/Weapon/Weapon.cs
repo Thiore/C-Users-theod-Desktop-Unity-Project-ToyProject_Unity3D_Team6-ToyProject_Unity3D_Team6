@@ -20,8 +20,10 @@ public class Weapon : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject bulletCasePrefab;
     private GameObject[] bulletPool;
+    private GameObject[] bulletCasePool;
     private int poolSize = 10;
     private int nextBullet = 0;
+    private int nextBulletCase = 0;
 
     private void Start()
     {
@@ -31,6 +33,13 @@ public class Weapon : MonoBehaviour
         {
             bulletPool[i] = Instantiate(bulletPrefab);
             bulletPool[i].SetActive(false);
+        }
+        // 탄피 초기화
+        bulletCasePool = new GameObject[poolSize];
+        for (int i = 0; i < poolSize; i++)
+        {
+            bulletCasePool[i] = Instantiate(bulletCasePrefab);
+            bulletCasePool[i].SetActive(false);
         }
     }
 
@@ -75,6 +84,7 @@ public class Weapon : MonoBehaviour
     {
         // 오브젝트 풀에서 총알 가져오기
         GameObject bullet = GetNextBulletFromPool();
+        GameObject bulletCase = GetNextBulletCaseFromPool();
         if (bullet != null)
         {
             bullet.transform.position = bulletPoistion.position;
@@ -87,7 +97,7 @@ public class Weapon : MonoBehaviour
         }
 
         // 탄피 발사 로직
-        GameObject bulletCase = Instantiate(bulletCasePrefab, bulletCasePosition.position, bulletCasePosition.rotation);
+        bulletCase = Instantiate(bulletCasePrefab, bulletCasePosition.position, bulletCasePosition.rotation);
         Rigidbody caseRigidbody = bulletCase.GetComponent<Rigidbody>();
         Vector3 caseForce = bulletCasePosition.forward * Random.Range(-3, -2) + Vector3.up * Random.Range(2, 3);
         caseRigidbody.AddForce(caseForce, ForceMode.Impulse);
@@ -102,6 +112,13 @@ public class Weapon : MonoBehaviour
         GameObject bullet = bulletPool[nextBullet];
         nextBullet = (nextBullet + 1) % poolSize;
         return bullet;
+    }
+    private GameObject GetNextBulletCaseFromPool()
+    {
+        // 다음 사용할 총알을 풀에서 가져오기
+        GameObject bulletCase = bulletCasePool[nextBulletCase];
+        nextBulletCase = (nextBulletCase + 1) % poolSize;
+        return bulletCase;
     }
     private void OnCollisionEnter(Collision collision)
     {
