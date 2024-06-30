@@ -9,18 +9,18 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "prop") 
+        if (collision.gameObject.tag == "prop")
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         else if (collision.gameObject.tag == "Floor")
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         else if (collision.gameObject.tag == "Enemy")
         {
             Debug.Log("±¦Âú´Ï?...");
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
 
