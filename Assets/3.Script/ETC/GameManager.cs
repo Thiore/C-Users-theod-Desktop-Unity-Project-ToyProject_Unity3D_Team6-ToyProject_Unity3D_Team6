@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum ePlayer
 {
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        selectPlayer = ePlayer.Mango;
     }
 
     private ePlayer selectPlayer;
@@ -38,7 +40,16 @@ public class GameManager : MonoBehaviour
             selectPlayer = value;
         }
     }
+    private bool isGame = false;
 
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name.Equals("MainGame"))
+            Cursor.lockState = CursorLockMode.Locked;
+        else
+            Cursor.lockState = CursorLockMode.None;
+    }
+    
 
 
 

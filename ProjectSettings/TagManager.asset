@@ -8,6 +8,7 @@ TagManager:
   - prop
   - Melee
   - Floor
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
+  - Prop
   - 
   - 
   - 

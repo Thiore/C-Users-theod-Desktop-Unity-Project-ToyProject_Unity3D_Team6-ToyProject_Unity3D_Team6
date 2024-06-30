@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class Chase_Player_Camera : MonoBehaviour
 {
-    [SerializeField] private Transform Player;
+    [SerializeField] private Transform Mango;
+    [SerializeField] private Transform Runa;
+
+    [SerializeField] private LayerMask Obstacle;
+
+    private Transform Player;
+
+    private GameObject CullingObject = null;
+    [SerializeField] private float CullingAlpha = 0.3f;
+
     [Range(20,60)]
     [SerializeField] private float CameraPosY = 40f;
     [Range(10, 40)]
@@ -12,6 +21,22 @@ public class Chase_Player_Camera : MonoBehaviour
     [Range(10, 80)]
     [SerializeField] private float CameraRotX = 50f;
 
+    private void Start()
+    {
+        
+        if (GameManager.instance.SelectPlayer.Equals(ePlayer.Mango))
+        {
+            Debug.Log(GameManager.instance.SelectPlayer);
+            Player = Mango;
+            Runa.gameObject.SetActive(false);
+        }
+        else
+        {
+            Player = Runa;
+            Mango.gameObject.SetActive(false);
+        }
+        Debug.Log("나안불림");
+    }
 
     private void Update()
     {
@@ -26,7 +51,31 @@ public class Chase_Player_Camera : MonoBehaviour
 
         transform.position = playerPos;
 
-        
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, transform.forward, out hit, Vector3.Distance(Player.position, transform.position), Obstacle))
+        {
+            if(CullingObject == null)
+            {
+                CullingObject = hit.transform.gameObject;
+                
+            }
+            Color DownAlpha = CullingObject.GetComponentInChildren<Renderer>().material.color;
+            DownAlpha.a = Mathf.Lerp(DownAlpha.a, CullingAlpha, Time.deltaTime);
+            
+            CullingObject.GetComponentInChildren<Renderer>().material.color = DownAlpha;
+        }
+        else
+        {
+            if (CullingObject != null)
+            {
+                CullingObject.GetComponentInChildren<Renderer>().material.color = Color.white;               
+                CullingObject = null;
+            }
+
+        }
+        Debug.DrawRay(transform.position, transform.forward * Vector3.Distance(Player.position, transform.position) , Color.red);
+
 
     }
 }

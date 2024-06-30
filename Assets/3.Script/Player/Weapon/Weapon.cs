@@ -13,16 +13,14 @@ public class Weapon : MonoBehaviour
     [SerializeField] private ParticleSystem HammerEffect;
 
     public Transform bulletPoistion;
-    public GameObject bullet;
     public Transform bulletCasePosition;
-    public GameObject bulletCase;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject bulletCasePrefab;
 
     private Coroutine Swing_Coroutine = null;
 
     public int Damage { get => damage; }
 
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private GameObject bulletCasePrefab;
     private GameObject[] bulletPool;
     private GameObject[] bulletCasePool;
     private int poolSize = 10;
@@ -31,20 +29,24 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        //∫“∑ø √ ±‚»≠
-        bulletPool = new GameObject[poolSize];
-        for (int i = 0; i < poolSize; i++)
+        if (type == Type.Range)
         {
-            bulletPool[i] = Instantiate(bulletPrefab);
-            bulletPool[i].SetActive(false);
+            //∫“∑ø √ ±‚»≠
+            bulletPool = new GameObject[poolSize];
+            for (int i = 0; i < poolSize; i++)
+            {
+                bulletPool[i] = Instantiate(bulletPrefab);
+                bulletPool[i].SetActive(false);
+            }
+            // ≈∫«« √ ±‚»≠
+            bulletCasePool = new GameObject[poolSize];
+            for (int i = 0; i < poolSize; i++)
+            {
+                bulletCasePool[i] = Instantiate(bulletCasePrefab);
+                bulletCasePool[i].SetActive(false);
+            }
         }
-        // ≈∫«« √ ±‚»≠
-        bulletCasePool = new GameObject[poolSize];
-        for (int i = 0; i < poolSize; i++)
-        {
-            bulletCasePool[i] = Instantiate(bulletCasePrefab);
-            bulletCasePool[i].SetActive(false);
-        }
+       
     }
 
     public void Use()
@@ -61,7 +63,7 @@ public class Weapon : MonoBehaviour
 
             Swing_Coroutine = StartCoroutine("Swing");
         }
-        else if (type == Type.Range)
+        else
         {
             StartCoroutine("Shot");
         }
@@ -72,7 +74,7 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         meleeArea.enabled = true;
         trailEffect.SetActive(true);
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.6f);
         meleeArea.enabled = false;
         trailEffect.SetActive(false);
     }

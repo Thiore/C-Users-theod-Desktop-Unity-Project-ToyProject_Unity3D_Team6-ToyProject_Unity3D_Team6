@@ -99,13 +99,12 @@ public class Player_Move : MonoBehaviour
             }
         }
 
-            // Dazed 상태일 때
-            if (Daze_Coroutine != null)
+        // Dazed 상태일 때
+        if (Daze_Coroutine != null)
         {
             return; // Dazed 상태 동안에는 다른 입력을 처리하지 않음
-            
-        }
 
+        }
         //구르는중
         if(Rolling_Coroutine != null)
         {
@@ -113,10 +112,9 @@ public class Player_Move : MonoBehaviour
             DecreaseRollSpeed -= Time.deltaTime * 30f;
             Vector3 movePos = transform.position + RollingForward * moveVec.z * DecreaseRollSpeed * Time.deltaTime;
             player_r.MovePosition(movePos);
-
             return; // 구르는 동안에는 다른 입력을 처리하지 않음
         }
-
+       
         // 공격 중일 때
         if (Swing_Coroutine != null)
         {
@@ -128,7 +126,6 @@ public class Player_Move : MonoBehaviour
         //{
         //    return; // 충돌 중에는 다른 입력을 처리하지 않음
         //}
-
         // 이동 입력 받기
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
@@ -146,7 +143,6 @@ public class Player_Move : MonoBehaviour
             speed = walkSpeed;
             playerAnimator.SetBool("isRunning", false);
         }
-
         // 플레이어 위치 업데이트
         if (moveVec != Vector3.zero)
         {
@@ -170,7 +166,6 @@ public class Player_Move : MonoBehaviour
                 movementSoundCoroutine = null;
             }
         }
-
         // Space Bar를 누르면 구르기 시작
         if (Input.GetKeyDown(KeyCode.Space) && moveVec != Vector3.zero)
         {
