@@ -46,8 +46,8 @@ public class Player_Move : MonoBehaviour
     //private bool isRolling = false;
     //private bool isDazed = false;
     //private bool isAttacking = false; // 공격 중 상태 변수 추가
-    private bool isColliding = false; // 충돌 상태 변수 추가
-    private float add = 50f;
+    //private bool isColliding = false; // 충돌 상태 변수 추가
+    //private float add = 50f;
     #endregion
 
     Vector3 moveVec;

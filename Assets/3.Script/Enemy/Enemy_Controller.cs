@@ -23,8 +23,6 @@ public class Enemy_Controller : MonoBehaviour
 
     private bool isGround;
 
-    private int EnemyIndex = 5;
-
     public NavMeshAgent agent;
     public NavMeshAgent Agent { get => agent; protected set => agent = value; }
 
