@@ -10,10 +10,14 @@ public class Weapon : MonoBehaviour
     [SerializeField] public float rate;
     [SerializeField] private BoxCollider meleeArea;
     [SerializeField] private GameObject trailEffect;
+    [SerializeField] private ParticleSystem HammerEffect;
+
     public Transform bulletPoistion;
     public GameObject bullet;
     public Transform bulletCasePosition;
     public GameObject bulletCase;
+
+    private Coroutine Swing_Coroutine = null;
 
     public int Damage { get => damage; }
 
@@ -21,8 +25,15 @@ public class Weapon : MonoBehaviour
     {
         if (type == Type.Melee)
         {
-            StopCoroutine("Swing");
-            StartCoroutine("Swing");
+            if(Swing_Coroutine != null)
+            {
+                StopCoroutine("Swing");
+                meleeArea.enabled = false;
+                trailEffect.SetActive(false);
+                Swing_Coroutine = null;
+            }
+
+            Swing_Coroutine = StartCoroutine("Swing");
         }
         else if (type == Type.Range)
         {
@@ -32,9 +43,10 @@ public class Weapon : MonoBehaviour
 
     private IEnumerator Swing()
     {
+        yield return new WaitForSeconds(0.2f);
         meleeArea.enabled = true;
         trailEffect.SetActive(true);
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.4f);
         meleeArea.enabled = false;
         trailEffect.SetActive(false);
     }

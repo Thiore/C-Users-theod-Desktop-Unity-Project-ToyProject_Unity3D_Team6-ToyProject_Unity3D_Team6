@@ -71,9 +71,8 @@ public class EnemySpawner : MonoBehaviour
 
         Enemy_Controller enemy = Instantiate(enemy_Controllers[index], transform.position, Quaternion.identity);
         enemy.SetupData(data);
-        enemy.Agent.enabled = false;
         enemy_list.Add(enemy);
-        enemy.gameObject.SetActive(false);
+        //enemy.gameObject.SetActive(false);
     }
 
     private IEnumerator DropEnemy_co()
@@ -85,7 +84,6 @@ public class EnemySpawner : MonoBehaviour
                 int index = Random.Range(0, enemy_list.Count);
                 var enemy = enemy_list[index];
                 enemy_list.RemoveAt(index);
-
                 enemy.transform.position = Setup_SpawnPoint();
                 enemy.gameObject.SetActive(true);
                 yield return new WaitForSeconds(1.5f);

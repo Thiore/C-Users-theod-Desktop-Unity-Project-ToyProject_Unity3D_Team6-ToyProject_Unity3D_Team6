@@ -13,6 +13,8 @@ public class Enemy_Controller : MonoBehaviour
 
     private EnemySpawner spawner;
 
+    private Enemy_Data data;
+
     public float MaxHp;
     public float CurrentHp { get; protected set; }
     float damage;
@@ -20,6 +22,8 @@ public class Enemy_Controller : MonoBehaviour
     public bool IsDead { get => isDead; set => isDead = value; }
 
     private bool isGround;
+
+    private int EnemyIndex = 5;
 
     public NavMeshAgent agent;
     public NavMeshAgent Agent { get => agent; protected set => agent = value; }
@@ -31,12 +35,16 @@ public class Enemy_Controller : MonoBehaviour
         player = FindObjectOfType<Player_Controller>();
         spawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         agent = GetComponent<NavMeshAgent>();
+        gameObject.SetActive(false);
     }
 
     private void OnEnable()
     {
         isGround = false;
         StartCoroutine(CheckGround());
+        MaxHp = data.MaxHp;
+        CurrentHp = data.MaxHp;
+        damage = data.damage;
     }
 
     private void Update()
@@ -48,11 +56,12 @@ public class Enemy_Controller : MonoBehaviour
     {
         while(!isGround)
         {
-            if (transform.position.y <= 0.1f)
+            if (transform.position.y <= 1.3f)
             {
                 agent.enabled = true;
                 isGround = true;
                 transform.rotation = Quaternion.identity;
+                agent.speed = data.speed;
                 StartCoroutine(Update_target_position_co());
             }
             else
@@ -62,14 +71,13 @@ public class Enemy_Controller : MonoBehaviour
             }
             yield return null;
         }
+        yield break;
     }
 
     public void SetupData(Enemy_Data data)
     {
-        MaxHp = data.MaxHp;
-        CurrentHp = data.MaxHp;
-        damage = data.damage;
-        agent.speed = data.speed;
+        this.data = data;
+       
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -108,6 +116,7 @@ public class Enemy_Controller : MonoBehaviour
         {
             isDead = true;
             StopCoroutine(Update_target_position_co());
+            agent.enabled = false;
             gameObject.SetActive(false);
             gameObject.transform.position = spawner.transform.position;
             spawner.Enemy_list.Add(this);

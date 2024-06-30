@@ -6,14 +6,26 @@ public class Player_Move : MonoBehaviour
 {
     [SerializeField] public float walkSpeed = 100f;
     [SerializeField] public float runSpeed = 150f;
+   
     [SerializeField] public float rollSpeed = 100f;
-    [SerializeField] public float rollDuration = 0.5f;
-    [SerializeField] public float dazeDuration = 0.5f; // 이동을 못하는 시간
-    private AudioSource player_audio;
-
+    #region 재현 rolling변수
+    //[SerializeField] public float rollDuration = 0.5f;
+    //[SerializeField] public float dazeDuration = 0.5f; // 이동을 못하는 시간
+    #endregion
+    #region 영훈 롤링/daze?수정(이유 : 애니메이션 anystate에 bool값으로 들어와서 앞으로 몸던지고 있던거였습니다.trigger로 수정해놓겠습니다.)
+    private bool isZeroDuration = false;
+    private float AnimDuration = 0f;
+    private AnimatorStateInfo AnimInfo;
+    private Coroutine Rolling_Coroutine = null;
+    private Coroutine Daze_Coroutine = null;
+    private Coroutine Swing_Coroutine = null;
+    #endregion
     #region 영훈 / 마우스 감도
     [Range(100, 1000)]
     [SerializeField] public float MouseSpeed = 500f;
+
+    #endregion
+    #region Audio_Clip
     [SerializeField] private AudioClip swing_sound;
     [SerializeField] private AudioClip crash_sound;
     [SerializeField] private AudioClip roll_sound;
@@ -31,9 +43,9 @@ public class Player_Move : MonoBehaviour
     private float dazeStartTime;
     private bool fdown;
     private bool isFireReady;
-    private bool isRolling = false;
-    private bool isDazed = false;
-    private bool isAttacking = false; // 공격 중 상태 변수 추가
+    //private bool isRolling = false;
+    //private bool isDazed = false;
+    //private bool isAttacking = false; // 공격 중 상태 변수 추가
     private bool isColliding = false; // 충돌 상태 변수 추가
     private float add = 50f;
     #endregion
@@ -43,6 +55,7 @@ public class Player_Move : MonoBehaviour
 
     [SerializeField] private Weapon equiaWeapon;
 
+    private AudioSource player_audio;
     private Animator playerAnimator;
     private Rigidbody player_r;
 
@@ -67,58 +80,54 @@ public class Player_Move : MonoBehaviour
 
     private void Update()
     {
+        #region 영훈 현재 애니메이션 정보를 많이 사용함
+        AnimInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
+        #endregion
+
         if (player_Health.isDie)
         {
             return;
         }
 
-        // Dazed 상태일 때
-        if (isDazed)
+        //셋중 한동작이라도 진행중일 경우 걷기 또는 뛰는 사운드 종료하기
+        if (Rolling_Coroutine != null || Daze_Coroutine != null || Swing_Coroutine != null)
         {
-            if (Time.time - dazeStartTime > dazeDuration)
+            if (movementSoundCoroutine != null)
             {
-                // Dazed 종료
-                isDazed = false;
-                playerAnimator.SetBool("isDazed", false);
-            }
-            else
-            {
-                return; // Dazed 상태 동안에는 다른 입력을 처리하지 않음
+                StopCoroutine(movementSoundCoroutine);
+                movementSoundCoroutine = null;
             }
         }
 
-        // 구르는 중일 때
-        if (isRolling)
+            // Dazed 상태일 때
+            if (Daze_Coroutine != null)
         {
-            if (Time.time - rollStartTime > rollDuration)
-            {
-                // 구르기 종료
-                isRolling = false;
-                playerAnimator.SetBool("isRolling", false);
-                StartDazed(); // 구른 후 Dazed 상태로 전환
-            }
-            else
-            {
-                // 구르는 동안 이동 업데이트
-                DecreaseRollSpeed -= Time.deltaTime * 30f;
-                Vector3 movePos = transform.position + RollingForward * moveVec.z * DecreaseRollSpeed * Time.deltaTime;
-                player_r.MovePosition(movePos);
+            return; // Dazed 상태 동안에는 다른 입력을 처리하지 않음
+            
+        }
 
-                return; // 구르는 동안에는 다른 입력을 처리하지 않음
-            }
+        //구르는중
+        if(Rolling_Coroutine != null)
+        {
+            // 구르는 동안 이동 업데이트
+            DecreaseRollSpeed -= Time.deltaTime * 30f;
+            Vector3 movePos = transform.position + RollingForward * moveVec.z * DecreaseRollSpeed * Time.deltaTime;
+            player_r.MovePosition(movePos);
+
+            return; // 구르는 동안에는 다른 입력을 처리하지 않음
         }
 
         // 공격 중일 때
-        if (isAttacking)
+        if (Swing_Coroutine != null)
         {
             return; // 공격 중에는 다른 입력을 처리하지 않음
         }
 
-        // 충돌 중일 때
-        if (isColliding)
-        {
-            return; // 충돌 중에는 다른 입력을 처리하지 않음
-        }
+        //// 충돌 중일 때
+        //if (isColliding)
+        //{
+        //    return; // 충돌 중에는 다른 입력을 처리하지 않음
+        //}
 
         // 이동 입력 받기
         hAxis = Input.GetAxisRaw("Horizontal");
@@ -165,12 +174,11 @@ public class Player_Move : MonoBehaviour
         // Space Bar를 누르면 구르기 시작
         if (Input.GetKeyDown(KeyCode.Space) && moveVec != Vector3.zero)
         {
-            player_audio.PlayOneShot(roll_sound);
-            RollingForward = transform.forward;
-            DecreaseRollSpeed = rollSpeed;
+            
             StartRolling();
         }
-        //Attack(); // 공격 처리
+        
+            Attack(); // 공격 처리
         // 마우스 위치를 향해 플레이어 회전
         RotatePlayerToMouse();
     }
@@ -183,7 +191,7 @@ public class Player_Move : MonoBehaviour
     private void RotatePlayerToMouse()
     {
         // 구르는 중이나 Dazed 상태에서는 회전하지 않음
-        if (isRolling || isDazed || isAttacking) return; // 공격 중에도 회전하지 않음
+        if (Rolling_Coroutine != null || Daze_Coroutine != null || Swing_Coroutine != null) return; // 공격 중에도 회전하지 않음
 
         float mouseX = Input.GetAxis("Mouse X");
         transform.Rotate(transform.up, mouseX * Time.deltaTime * MouseSpeed);
@@ -191,69 +199,119 @@ public class Player_Move : MonoBehaviour
 
     private void StartRolling()
     {
-        isRolling = true;
-        rollStartTime = Time.time;
-        playerAnimator.SetBool("isRolling", true);
-    }
+       
+        Rolling_Coroutine = StartCoroutine(Rolling_co());
 
-    private void StartDazed()
+        
+    }
+    private IEnumerator Rolling_co()
     {
-        isDazed = true;
-        dazeStartTime = Time.time;
-        playerAnimator.SetBool("isDazed", true);
-    }
+        isZeroDuration = false;
+        playerAnimator.SetTrigger("Rolling");
+        player_audio.PlayOneShot(roll_sound);
+        RollingForward = transform.forward;
+        DecreaseRollSpeed = rollSpeed;        
+        while (!isZeroDuration)
+        {
 
+            if (AnimInfo.IsName("Dodge"))
+            {
+                isZeroDuration = true;
+                AnimDuration = AnimInfo.length;
+
+            }
+            yield return null;
+        }
+        yield return new WaitForSeconds(AnimDuration - (AnimDuration * 0.1f));
+        isZeroDuration = false;
+        Rolling_Coroutine = null;
+        yield break;
+
+    }
     private void Attack()
     {
-        fireDelay += Time.deltaTime;
-        isFireReady = (equiaWeapon.rate < fireDelay);
+        //fireDelay += Time.deltaTime;
+        //isFireReady = (equiaWeapon.rate < fireDelay);
 
-        if (fdown && isFireReady && !isRolling && !isDazed)
+        if (fdown && Swing_Coroutine == null && Rolling_Coroutine == null && Daze_Coroutine == null)
         {
-            isAttacking = true; // 공격 시작
+            //isAttacking = true; // 공격 시작
             equiaWeapon.Use();
-            playerAnimator.SetTrigger("DoSwing");
-            fireDelay = 0;
+            //fireDelay = 0;
 
-            player_audio.PlayOneShot(swing_sound);
+            
             // 공격 애니메이션이 끝날 때까지 대기
-            StartCoroutine(EndAttackAfterAnimation());
+            Swing_Coroutine = StartCoroutine(EndAttackAfterAnimation());
         }
     }
 
     private IEnumerator EndAttackAfterAnimation()
     {
-        // 애니메이션 길이만큼 대기
-        yield return new WaitForSeconds(playerAnimator.GetCurrentAnimatorStateInfo(0).length);
-        isAttacking = false; // 공격 종료
+        isZeroDuration = false;
+        playerAnimator.SetTrigger("Swing");
+        player_audio.PlayOneShot(swing_sound);
+        while (!isZeroDuration)
+        {
+
+            if (AnimInfo.IsName("Swing"))
+            {
+                isZeroDuration = true;
+                AnimDuration = AnimInfo.length;
+
+            }
+            yield return null;
+        }
+        yield return new WaitForSeconds(AnimDuration - (AnimDuration * 0.1f));
+        isZeroDuration = false;
+        Swing_Coroutine = null;
+        yield break;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         // 충돌한 오브젝트가 prop 태그를 가지고 있는지 확인
-        if (collision.gameObject.CompareTag("prop"))
+        if (collision.gameObject.CompareTag("prop")&&Daze_Coroutine == null)
         {
             Debug.Log("충돌");
 
             // 플레이어의 진행 방향을 계산하여 반대로 힘을 가함
-            Vector3 collisionDirection = -player_r.velocity.normalized;
-            player_r.AddForce(collisionDirection * add, ForceMode.Impulse);
-            player_audio.PlayOneShot(crash_sound);
+            Vector3 collisionDirection = -player_r.velocity;
+            player_r.AddForce(collisionDirection*1.1f, ForceMode.Force);
+           
 
-            // 충돌 상태 설정 및 Dazed 시작
-            isColliding = true;
-            StartDazed();
-            StartCoroutine(EndCollisionAfterDaze());
-        }else if (collision.gameObject.CompareTag("Enemy"))
+            Daze_Coroutine = StartCoroutine(EndCollisionAfterDaze());
+        }
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             //추가해야함~
         }
     }
+    public void Land()
+    {
+
+    }
 
     private IEnumerator EndCollisionAfterDaze()
     {
-        yield return new WaitForSeconds(dazeDuration);
-        isColliding = false;
+        isZeroDuration = false;
+        playerAnimator.SetTrigger("Dazed");
+        player_audio.PlayOneShot(crash_sound);
+       
+        while (!isZeroDuration)
+        {
+
+            if (AnimInfo.IsName("Land"))
+            {
+                isZeroDuration = true;
+                AnimDuration = AnimInfo.length;
+
+            }
+            yield return null;
+        }
+        yield return new WaitForSeconds(AnimDuration - (AnimDuration * 0.1f));
+        isZeroDuration = false;
+        Daze_Coroutine = null;
+        yield break;
     }
 
     private IEnumerator PlayMovementSound()

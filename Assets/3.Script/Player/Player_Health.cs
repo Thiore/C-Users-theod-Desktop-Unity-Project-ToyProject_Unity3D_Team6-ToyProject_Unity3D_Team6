@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player_Health : MonoBehaviour
 {
-    [SerializeField] private int StartHealth = 3;  // 시작 체력
+    [SerializeField] private int StartHealth = 100;  // 시작 체력
     private int CurrentHealth;  // 현재 체력
     private Animator playerAnimator;
     public bool isDie = false;
