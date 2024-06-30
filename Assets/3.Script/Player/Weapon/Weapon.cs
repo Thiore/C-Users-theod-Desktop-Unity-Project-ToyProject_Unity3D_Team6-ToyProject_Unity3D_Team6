@@ -95,9 +95,15 @@ public class Weapon : MonoBehaviour
             Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
             bulletRigidbody.velocity = bullet.transform.forward * 50;
         }
+        if (bulletCase != null)
+        {
+            bulletCase.transform.position = bulletCasePosition.position;
+            bulletCase.transform.rotation = bulletCasePosition.rotation;
+            bulletCase.SetActive(true);
 
+        }
         // 탄피 발사 로직
-        bulletCase = Instantiate(bulletCasePrefab, bulletCasePosition.position, bulletCasePosition.rotation);
+        //bulletCase = Instantiate(bulletCasePrefab, bulletCasePosition.position, bulletCasePosition.rotation);
         Rigidbody caseRigidbody = bulletCase.GetComponent<Rigidbody>();
         Vector3 caseForce = bulletCasePosition.forward * Random.Range(-3, -2) + Vector3.up * Random.Range(2, 3);
         caseRigidbody.AddForce(caseForce, ForceMode.Impulse);
@@ -120,13 +126,5 @@ public class Weapon : MonoBehaviour
         nextBulletCase = (nextBulletCase + 1) % poolSize;
         return bulletCase;
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        // 총알이 땅에 충돌했을 때 비활성화 처리
-        if (collision.gameObject.CompareTag("prop"))
-        {
-            gameObject.SetActive(false); // 현재 총알을 비활성화
-                                         
-        }
-    }
+    
 }

@@ -2096,7 +2096,7 @@ MonoBehaviour:
   rollDuration: 0.5
   dazeDuration: 0.5
   MouseSpeed: 685
-  swing_sound: {fileID: 0}
+  swing_sound: {fileID: 8300000, guid: fb5f441e133415448b36ce730c22d92f, type: 3}
   crash_sound: {fileID: 0}
   roll_sound: {fileID: 8300000, guid: 13182107f288fdc47a11f9216c8f062b, type: 3}
   walk_sound: {fileID: 8300000, guid: 9f110f013401f42e996da5094d6f8b8b, type: 3}
@@ -9086,7 +9086,7 @@ GameObject:
   - component: {fileID: 3886392196262813986}
   m_Layer: 0
   m_Name: Wall (1)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9558,7 +9558,7 @@ GameObject:
   - component: {fileID: 3886392197001873879}
   m_Layer: 0
   m_Name: Wall (3)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9790,7 +9790,7 @@ GameObject:
   - component: {fileID: 3886392197175562025}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10324,7 +10324,7 @@ GameObject:
   - component: {fileID: 3886392197632622804}
   m_Layer: 0
   m_Name: Wall (2)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
