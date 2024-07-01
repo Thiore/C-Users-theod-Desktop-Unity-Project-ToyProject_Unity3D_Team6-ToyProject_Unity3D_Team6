@@ -23,6 +23,7 @@ public class Chase_Player_Camera : MonoBehaviour
     [Range(10, 80)]
     [SerializeField] private float CameraRotX = 50f;
 
+    private bool isDead = false;
     private void Start()
     {
         GameManager.instance.Score = 0;
@@ -40,9 +41,10 @@ public class Chase_Player_Camera : MonoBehaviour
             Mango.gameObject.SetActive(false);
             Destroy(Mango.gameObject);
         }
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Confined;
         Debug.Log("나안불림");
         audio = GetComponent<AudioSource>();
+        isDead = false;
     }
 
     private void Update()
@@ -83,7 +85,21 @@ public class Chase_Player_Camera : MonoBehaviour
         }
         Debug.DrawRay(transform.position, transform.forward * Vector3.Distance(Player.position, transform.position) , Color.red);
 
-        if(Player.gameObject.GetComponent<Player_Health>().isDie)
-            audio.PlayOneShot(dieClip);
+        
+        
+            
+    }
+    private void DeadClip()
+    {
+        if (Player.gameObject.GetComponent<Player_Health>().isDie)
+        {
+            if (!isDead)
+            {
+                audio.Stop();
+                audio.PlayOneShot(dieClip);
+                isDead = true;
+            }
+           
+        }
     }
 }
