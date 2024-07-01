@@ -13,7 +13,8 @@ public class RankingManager : MonoBehaviour
     }
     public void SaveRank()
     {
-
+        name = GameManager.instance.SelectPlayer.ToString();
+        Score = GameManager.instance.Score;
     }
 
     public void LoadRank()

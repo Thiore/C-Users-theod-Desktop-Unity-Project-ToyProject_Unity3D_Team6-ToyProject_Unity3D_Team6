@@ -19,6 +19,13 @@ public class Player_Health : MonoBehaviour
         playerAnimator = GetComponentInChildren<Animator>();
         isDie = false;
     }
+    private void Update()
+    {
+        if(transform.position.y<-1f)
+        {
+            OnDamage(3);
+        }
+    }
 
     public void OnDamage(int damage)
     {

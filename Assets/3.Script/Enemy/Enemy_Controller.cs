@@ -136,8 +136,11 @@ public class Enemy_Controller : MonoBehaviour
     {
         while (isGround == true && isDead == false)
         {
-            agent.isStopped = false;
-            agent.SetDestination(player.transform.position);
+            if (player != null)
+            {
+                agent.isStopped = false;
+                agent.SetDestination(player.transform.position);
+            }
             yield return null;
         }
     }

@@ -31,11 +31,11 @@ public class Player_Gunner : MonoBehaviour
     private float dazeStartTime;
     private bool fdown;
     private bool isFireReady;
-    private bool isRolling = false;
-    private bool isDazed = false;
+    //private bool isRolling = false;
+    //private bool isDazed = false;
     //private bool isAttacking = false; // 공격 중 상태 변수 추가
-    private bool isColliding = false; // 충돌 상태 변수 추가
-    private float add = 50f;
+    //private bool isColliding = false; // 충돌 상태 변수 추가
+    //private float add = 50f;
     #endregion
 
     Vector3 moveVec;
@@ -122,12 +122,6 @@ public class Player_Gunner : MonoBehaviour
             return; // 공격 중에는 다른 입력을 처리하지 않음
         }
 
-        // 충돌 중일 때
-        if (isColliding)
-        {
-            return; // 충돌 중에는 다른 입력을 처리하지 않음
-        }
-
         // 이동 입력 받기
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
@@ -202,7 +196,7 @@ public class Player_Gunner : MonoBehaviour
         if (sDown1) weaponIndex = 0;
         if (sDown2) weaponIndex = 1;
 
-        if ((sDown1 || sDown2) && !isDazed)
+        if ((sDown1 || sDown2) && Daze_Coroutine == null)
         {
             //if(equipWeapon.activeSelf)
                 equipWeapon.gameObject.SetActive(false); //손에 이미 들려있기 때문에
@@ -241,16 +235,32 @@ public class Player_Gunner : MonoBehaviour
 
     private void StartRolling()
     {
-        isRolling = true;
-        rollStartTime = Time.time;
-        playerAnimator.SetTrigger("Rolling");
+        Rolling_Coroutine = StartCoroutine(Rolling_co());
     }
 
-    private void StartDazed()
+    private IEnumerator Rolling_co()
     {
-        isDazed = true;
-        dazeStartTime = Time.time;
-        playerAnimator.SetTrigger("Dazed");
+        isZeroDuration = false;
+        playerAnimator.SetTrigger("Rolling");
+        player_audio.PlayOneShot(roll_sound);
+        RollingForward = transform.forward;
+        DecreaseRollSpeed = rollSpeed;
+        while (!isZeroDuration)
+        {
+
+            if (AnimInfo.IsName("Dodge"))
+            {
+                isZeroDuration = true;
+                AnimDuration = AnimInfo.length;
+
+            }
+            yield return null;
+        }
+        yield return new WaitForSeconds(AnimDuration - (AnimDuration * 0.1f));
+        isZeroDuration = false;
+        Rolling_Coroutine = null;
+        yield break;
+
     }
 
     private void Attack()
@@ -265,7 +275,7 @@ public class Player_Gunner : MonoBehaviour
         fireDelay += Time.deltaTime;
         isFireReady = equipWeapon.rate < fireDelay;
 
-        if (fdown && isFireReady && !isDazed && !isSwap)
+        if (fdown && isFireReady && Daze_Coroutine == null && !isSwap)
         {
 
             Debug.Log("사용");
@@ -276,30 +286,6 @@ public class Player_Gunner : MonoBehaviour
             StartCoroutine(EndAttackAfterAnimation());
         }
     }
-    //private void Attack()
-    //{
-    //    fireDelay += Time.deltaTime;
-    //    isFireReady = (equipWeapon.rate < fireDelay);
-
-    //    if (fdown && isFireReady && !isRolling && !isDazed)
-    //    {
-    //        isAttacking = true; // 공격 시작
-    //        equipWeapon.Use();
-    //        playerAnimator.SetTrigger("doShot");
-    //        fireDelay = 0;
-
-    //        player_audio.PlayOneShot(swing_sound);
-    //        // 공격 애니메이션이 끝날 때까지 대기
-    //        StartCoroutine(EndAttackAfterAnimation());
-    //    }
-    //}
-
-    //private IEnumerator EndAttackAfterAnimation()
-    //{
-    //    // 애니메이션 길이만큼 대기
-    //    yield return new WaitForSeconds(playerAnimator.GetCurrentAnimatorStateInfo(0).length);
-    //    isAttacking = null; // 공격 종료
-    //}
     private IEnumerator EndAttackAfterAnimation()
     {
         isZeroDuration = false;
