@@ -17,8 +17,16 @@ public class Player_Health : MonoBehaviour
 
     public void OnDamage(int damage)
     {
-        CurrentHealth -= damage;  // 데미지를 받으면 현재 체력을 감소
-        Debug.Log("데미지");
+        if (!isDie)//isdie가 false일 경우에만 ondamage 메서드 호출
+        {
+            CurrentHealth -= damage;  // 데미지를 받으면 현재 체력을 감소
+            Debug.Log("데미지");
+        }
+        else // isdie가 true일 경우 즉시 리턴
+        {
+            return;
+        }
+        
         if (CurrentHealth <= 0)
         {
             Die();  // 체력이 0 이하가 되면 Die 메서드 호출

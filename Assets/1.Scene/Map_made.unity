@@ -480,8 +480,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcabce113326b1c4b9dc80e3bae46689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mango: {fileID: 0}
-  Runa: {fileID: 0}
+  Mango: {fileID: 37203032196264356}
+  Runa: {fileID: 1739703751}
+  Obstacle:
+    serializedVersion: 2
+    m_Bits: 64
+  CullingAlpha: 0.3
   CameraPosY: 40
   CameraPosZ: 25
   CameraRotX: 50
@@ -551,6 +555,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1739703751 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3787738877002031555, guid: 0af8ed4d07c1d29449c169b6d1f6cfb4, type: 3}
+  m_PrefabInstance: {fileID: 3787738877366870924}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1786721298
 GameObject:
   m_ObjectHideFlags: 0
