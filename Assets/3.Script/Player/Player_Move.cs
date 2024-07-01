@@ -280,7 +280,11 @@ public class Player_Move : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             //추가해야함~
-            player_audio.PlayOneShot(damage_sound);
+            if (!player_Health.isDie)
+            {
+                player_audio.PlayOneShot(damage_sound);
+            }
+            
         }
     }
     public void Land()
