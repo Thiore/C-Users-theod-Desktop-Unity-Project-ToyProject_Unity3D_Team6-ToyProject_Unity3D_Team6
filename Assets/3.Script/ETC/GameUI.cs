@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
     [SerializeField] private GameObject HeartPrefabs;
     [SerializeField] private Camera FinalCamera;
+    [SerializeField] private Text Score;
     private GameObject Heart;
     private List<GameObject> HeartList = new List<GameObject>();
     private Player_Health currentHealth;
@@ -31,6 +33,7 @@ public class GameUI : MonoBehaviour
             HeartList[i].transform.Rotate(Vector3.up,Time.deltaTime*10f);
         }
         SetHp();
+        Score.text = "Score : " + GameManager.instance.Score;
     }
 
     private void SetHp()

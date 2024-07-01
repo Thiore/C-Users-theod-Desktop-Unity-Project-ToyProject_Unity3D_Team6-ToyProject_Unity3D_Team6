@@ -30,6 +30,7 @@ public class Chase_Player_Camera : MonoBehaviour
             Player = Mango;
             Runa.gameObject.SetActive(false);
             Destroy(Runa.gameObject);
+            
         }
         else
         {
@@ -37,6 +38,7 @@ public class Chase_Player_Camera : MonoBehaviour
             Mango.gameObject.SetActive(false);
             Destroy(Mango.gameObject);
         }
+        Cursor.lockState = CursorLockMode.Locked;
         Debug.Log("나안불림");
     }
 

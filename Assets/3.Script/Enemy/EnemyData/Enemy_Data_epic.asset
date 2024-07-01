@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b3113fa91457d24f91e0105357c2f65, type: 3}
   m_Name: Enemy_Data_epic
   m_EditorClassIdentifier: 
-  MaxHp: 20
-  damage: 6
+  MaxHp: 6
+  damage: 1
   speed: 12
   score: 50
