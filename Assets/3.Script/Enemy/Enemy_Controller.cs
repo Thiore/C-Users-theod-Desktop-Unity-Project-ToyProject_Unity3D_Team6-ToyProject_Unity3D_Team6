@@ -26,11 +26,14 @@ public class Enemy_Controller : MonoBehaviour
     public NavMeshAgent agent;
     public NavMeshAgent Agent { get => agent; protected set => agent = value; }
 
+    private Rigidbody enemy_r;
+
 
     private void Awake()
     {
         isDead = false;
         spawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
+        enemy_r = GetComponent<Rigidbody>();
         gameObject.SetActive(false);
     }
 
@@ -43,6 +46,14 @@ public class Enemy_Controller : MonoBehaviour
         MaxHp = data.MaxHp;
         CurrentHp = data.MaxHp;
         damage = data.damage;
+    }
+
+    private void FixedUpdate()
+    {
+        if(!isGround)
+        {
+            enemy_r.AddForce(Vector3.down * 50f);
+        }
     }
 
     private IEnumerator CheckGround()
