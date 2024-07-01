@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using System.IO;
 
 public class RankingManager : MonoBehaviour
@@ -20,43 +19,55 @@ public class RankingManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        //LoadRank();
     }
 
-    public List<RankData> ranks = new List<RankData>();
-    public RankData[] ranks_a = new RankData[4];
     
-    private RankData rank = new RankData();
-    public void SortRank()
-    {
-        if(ranks.Count > 0)
-        {
-            ranks.Sort((rank1, rank2) => rank1.score.CompareTo(rank2.score));
-        }
 
-
-
-    }
+    public List<RankData> Rank_List = new List<RankData>();
+   
+    
+    public RankData rank = new RankData();
+    
     public void SaveRank()
     {
-        if (ranks.Count > 3)
-            ranks.RemoveAt(ranks.Count - 1);
+        for(int i = Rank_List.Count-1; i>=0;i--)
+        {
+            if(Rank_List[i].score>rank.score&&i.Equals(Rank_List.Count-1))
+            {
+                break;
+            }
+            else if (Rank_List[i].score > rank.score)
+            {
+                Rank_List.Insert(i, rank);
+                Rank_List.RemoveAt(Rank_List.Count - 1);
+                string jsonData = JsonUtility.ToJson(Rank_List);
+                string path = Path.Combine(Application.dataPath, "rankData.json");
 
-        rank.name = GameManager.instance.SelectPlayer.ToString();
-        rank.score = GameManager.instance.Score;
-        ranks.Add(rank);
-        string jsonData = JsonUtility.ToJson(ranks);
-        string path = Path.Combine(Application.dataPath, "rankData.json");
+                File.WriteAllText(path, jsonData);
+                return;
+            }
+            
+        }
         
-        File.WriteAllText(path, jsonData);
+        
     }
 
-    public void LoadRank()
+    public void SetRanking_Data()
+    {
+        rank.name = GameManager.instance.SelectPlayer.ToString();
+        rank.score = GameManager.instance.Score;
+        Debug.Log(rank.name);
+        Debug.Log(rank.score);
+    }
+
+    public List<RankData> LoadRank()
     {
         string path = Path.Combine(Application.dataPath, "rankData.json");
         string jsonData = File.ReadAllText(path);
-        ranks = JsonUtility.FromJson<List<RankData>>(jsonData);
+        return JsonUtility.FromJson<List<RankData>> (jsonData);
     }
+
+    
 
     
 }

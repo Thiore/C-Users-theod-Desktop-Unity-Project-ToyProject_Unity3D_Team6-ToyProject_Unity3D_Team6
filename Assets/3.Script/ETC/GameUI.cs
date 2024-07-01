@@ -14,6 +14,9 @@ public class GameUI : MonoBehaviour
     [SerializeField] private Text FScore;
     [SerializeField] private Text SScore;
     [SerializeField] private Text TScore;
+    [SerializeField] private Text CurrentScore;
+    [SerializeField] private Text CurrentName;
+
     
 
     private GameObject Heart;
@@ -46,15 +49,43 @@ public class GameUI : MonoBehaviour
 
     private void SetHp()
     {
-        if (!HeartList.Count.Equals(currentHealth.CurrentHealth))
+        if (!HeartList.Count.Equals(currentHealth.CurrentHealth)&&HeartList.Count>0)
         {
             Destroy(HeartList[HeartList.Count - 1]);
             HeartList.RemoveAt(HeartList.Count - 1);
         }
     }
 
-    private void Ranking()
+    public void LoadBoard()
     {
+        RankingManager.instance.SetRanking_Data();
+        CurrentScore.text = RankingManager.instance.rank.score.ToString();
+        CurrentName.text = RankingManager.instance.rank.name;
+        
+        List<RankData> ranks= RankingManager.instance.LoadRank();
+        switch(ranks.Count)
+        {
+            case 1:
+                Fisrt.text = ranks[0].name;
+                FScore.text = ranks[0].score.ToString();
+                break;
+            case 2:
+                Fisrt.text = ranks[0].name;
+                FScore.text = ranks[0].score.ToString();
+                Second.text = ranks[1].name;
+                SScore.text = ranks[1].score.ToString();
+                break;
+            case 3:
+                Fisrt.text = ranks[0].name;
+                FScore.text = ranks[0].score.ToString();
+                Second.text = ranks[1].name;
+                SScore.text = ranks[1].score.ToString();
+                Third.text = ranks[2].name;
+                TScore.text = ranks[2].score.ToString();
+                break;
+        }
+
+        
 
     }
 }

@@ -30,6 +30,7 @@ public class Player_Health : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                RankingManager.instance.SaveRank();
                 SceneManager.LoadScene("TitleScene");
             }
         }
@@ -43,23 +44,27 @@ public class Player_Health : MonoBehaviour
 
     public void OnDamage(int damage)
     {
-        if (!isDie)//isdie가 false일 경우에만 ondamage 메서드 호출
+        if(CurrentHealth>=0)
         {
-            CurrentHealth -= damage;  // 데미지를 받으면 현재 체력을 감소
-            Debug.Log("데미지");
-        }
-        else // isdie가 true일 경우 즉시 리턴
-        {
-           
-            return;
+            if (!isDie)//isdie가 false일 경우에만 ondamage 메서드 호출
+            {
+                CurrentHealth -= damage;  // 데미지를 받으면 현재 체력을 감소
+                Debug.Log("데미지");
+            }
+            else // isdie가 true일 경우 즉시 리턴
+            {
+
+                return;
+            }
+
+            if (CurrentHealth <= 0)
+            {
+                //RankingManager.instance.SaveRank();
+                Die();  // 체력이 0 이하가 되면 Die 메서드 호출
+                RankingManager.instance.SetRanking_Data();
+            }
         }
         
-        if (CurrentHealth <= 0)
-        {
-            //RankingManager.instance.SaveRank();
-            Die();  // 체력이 0 이하가 되면 Die 메서드 호출
-
-        }
     }
 
     private void Die()
@@ -71,6 +76,8 @@ public class Player_Health : MonoBehaviour
         isDie = true;
         ScoreBoard.SetActive(true);
         
+
+
 
     }
 

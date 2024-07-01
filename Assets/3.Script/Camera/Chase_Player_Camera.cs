@@ -85,9 +85,10 @@ public class Chase_Player_Camera : MonoBehaviour
         }
         Debug.DrawRay(transform.position, transform.forward * Vector3.Distance(Player.position, transform.position) , Color.red);
 
-        
-        
-            
+
+        DeadClip();
+
+
     }
     private void DeadClip()
     {
@@ -97,6 +98,7 @@ public class Chase_Player_Camera : MonoBehaviour
             {
                 audio.Stop();
                 audio.PlayOneShot(dieClip);
+                
                 isDead = true;
             }
            
