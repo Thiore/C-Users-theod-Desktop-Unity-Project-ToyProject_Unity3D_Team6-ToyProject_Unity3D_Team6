@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 3787738877002031559}
   - component: {fileID: 3787738877002031558}
   - component: {fileID: 3787738877002031580}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player_Runa
   m_TagString: Player
   m_Icon: {fileID: 0}

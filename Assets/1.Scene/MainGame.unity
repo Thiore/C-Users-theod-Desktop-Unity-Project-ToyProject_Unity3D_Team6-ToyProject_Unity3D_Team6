@@ -4482,6 +4482,7 @@ MonoBehaviour:
   Obstacle:
     serializedVersion: 2
     m_Bits: 128
+  CullingAlpha: 0.3
   CameraPosY: 40
   CameraPosZ: 25
   CameraRotX: 50
@@ -16261,7 +16262,7 @@ GameObject:
   - component: {fileID: 6440517095531611255}
   - component: {fileID: 6440517095531611254}
   - component: {fileID: 6440517095531611244}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player_Runa
   m_TagString: Player
   m_Icon: {fileID: 0}

@@ -29,11 +29,13 @@ public class Chase_Player_Camera : MonoBehaviour
             Debug.Log(GameManager.instance.SelectPlayer);
             Player = Mango;
             Runa.gameObject.SetActive(false);
+            Destroy(Runa.gameObject);
         }
         else
         {
             Player = Runa;
             Mango.gameObject.SetActive(false);
+            Destroy(Mango.gameObject);
         }
         Debug.Log("나안불림");
     }
