@@ -6,8 +6,7 @@ public class RankingBoard
 {
     public string name = "NonPlayer";
     public int Score = 0;
-    public int Minute = 0;
-    public int second = 0;
+    
 }
 
 public class ScoreManager : MonoBehaviour

@@ -40,15 +40,7 @@ public class GameManager : MonoBehaviour
             selectPlayer = value;
         }
     }
-    private bool isGame = false;
-
-    private void Start()
-    {
-        if (SceneManager.GetActiveScene().name.Equals("MainGame"))
-            Cursor.lockState = CursorLockMode.Locked;
-        else
-            Cursor.lockState = CursorLockMode.None;
-    }
+   
     
 
 
