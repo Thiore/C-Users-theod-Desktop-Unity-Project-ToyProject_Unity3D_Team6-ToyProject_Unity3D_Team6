@@ -287,11 +287,7 @@ public class Player_Move : MonoBehaviour
             
         }
     }
-    public void Land()
-    {
-
-    }
-
+   
     private IEnumerator EndCollisionAfterDaze()
     {
         isZeroDuration = false;

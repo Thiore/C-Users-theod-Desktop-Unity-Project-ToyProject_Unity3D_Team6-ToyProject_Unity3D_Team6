@@ -33,7 +33,7 @@ public class Player_Gunner : MonoBehaviour
     private bool isFireReady;
     private bool isRolling = false;
     private bool isDazed = false;
-    private bool isAttacking = false; // 공격 중 상태 변수 추가
+    //private bool isAttacking = false; // 공격 중 상태 변수 추가
     private bool isColliding = false; // 충돌 상태 변수 추가
     private float add = 50f;
     #endregion
@@ -49,7 +49,14 @@ public class Player_Gunner : MonoBehaviour
     private Player_Health player_Health;
 
     private Coroutine movementSoundCoroutine;
-
+    #region 영훈 롤링/daze?수정(이유 : 애니메이션 anystate에 bool값으로 들어와서 앞으로 몸던지고 있던거였습니다.trigger로 수정해놓겠습니다.)
+    private bool isZeroDuration = false;
+    private float AnimDuration = 0f;
+    private AnimatorStateInfo AnimInfo;
+    private Coroutine Rolling_Coroutine = null;
+    private Coroutine Daze_Coroutine = null;
+    private Coroutine isAttacking = null;
+    #endregion
     #region 승주 - Gunner
     public Weapon[] weapons; //스왑 장비들 (HandGun, Submachinegun)
    private bool sDown1; //1번장비
@@ -77,49 +84,40 @@ public class Player_Gunner : MonoBehaviour
 
     private void Update()
     {
+        AnimInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
         if (player_Health.isDie)
         {
             return;
         }
+        //셋중 한동작이라도 진행중일 경우 걷기 또는 뛰는 사운드 종료하기
+        if (Rolling_Coroutine != null || Daze_Coroutine != null || isAttacking != null)
+        {
+            if (movementSoundCoroutine != null)
+            {
+                StopCoroutine(movementSoundCoroutine);
+                movementSoundCoroutine = null;
+            }
+        }
 
         // Dazed 상태일 때
-        if (isDazed)
+        if (Daze_Coroutine != null)
         {
-            if (Time.time - dazeStartTime > dazeDuration)
-            {
-                // Dazed 종료
-                isDazed = false;
-                playerAnimator.SetBool("isDazed", false);
-            }
-            else
-            {
-                return; // Dazed 상태 동안에는 다른 입력을 처리하지 않음
-            }
+            return; // Dazed 상태 동안에는 다른 입력을 처리하지 않음
+
         }
 
         // 구르는 중일 때
-        if (isRolling)
+        if (Rolling_Coroutine != null)
         {
-            if (Time.time - rollStartTime > rollDuration)
-            {
-                // 구르기 종료
-                isRolling = false;
-                playerAnimator.SetBool("isRolling", false);
-                StartDazed(); // 구른 후 Dazed 상태로 전환
-            }
-            else
-            {
-                // 구르는 동안 이동 업데이트
-                DecreaseRollSpeed -= Time.deltaTime * 30f;
-                Vector3 movePos = transform.position + RollingForward * moveVec.z * DecreaseRollSpeed * Time.deltaTime;
-                player_r.MovePosition(movePos);
-
-                return; // 구르는 동안에는 다른 입력을 처리하지 않음
-            }
+            // 구르는 동안 이동 업데이트
+            DecreaseRollSpeed -= Time.deltaTime * 30f;
+            Vector3 movePos = transform.position + RollingForward * moveVec.z * DecreaseRollSpeed * Time.deltaTime;
+            player_r.MovePosition(movePos);
+            return; // 구르는 동안에는 다른 입력을 처리하지 않음
         }
 
         // 공격 중일 때
-        if (isAttacking)
+        if (isAttacking != null)
         {
             return; // 공격 중에는 다른 입력을 처리하지 않음
         }
@@ -178,6 +176,7 @@ public class Player_Gunner : MonoBehaviour
             player_audio.PlayOneShot(roll_sound);
             RollingForward = transform.forward;
             DecreaseRollSpeed = rollSpeed;
+            //StartDazed();
             StartRolling();
         }
         Attack(); // 공격 처리
@@ -234,7 +233,7 @@ public class Player_Gunner : MonoBehaviour
     private void RotatePlayerToMouse()
     {
         // 구르는 중이나 Dazed 상태에서는 회전하지 않음
-        if (isRolling || isDazed || isAttacking) return; // 공격 중에도 회전하지 않음
+        if (Rolling_Coroutine != null || Daze_Coroutine != null || isAttacking != null) return; // 공격 중에도 회전하지 않음
 
         float mouseX = Input.GetAxis("Mouse X");
         transform.Rotate(transform.up, mouseX * Time.deltaTime * MouseSpeed);
@@ -244,14 +243,14 @@ public class Player_Gunner : MonoBehaviour
     {
         isRolling = true;
         rollStartTime = Time.time;
-        playerAnimator.SetBool("isRolling", true);
+        playerAnimator.SetTrigger("Rolling");
     }
 
     private void StartDazed()
     {
         isDazed = true;
         dazeStartTime = Time.time;
-        playerAnimator.SetBool("isDazed", true);
+        playerAnimator.SetTrigger("Dazed");
     }
 
     private void Attack()
@@ -295,40 +294,73 @@ public class Player_Gunner : MonoBehaviour
     //    }
     //}
 
+    //private IEnumerator EndAttackAfterAnimation()
+    //{
+    //    // 애니메이션 길이만큼 대기
+    //    yield return new WaitForSeconds(playerAnimator.GetCurrentAnimatorStateInfo(0).length);
+    //    isAttacking = null; // 공격 종료
+    //}
     private IEnumerator EndAttackAfterAnimation()
     {
-        // 애니메이션 길이만큼 대기
-        yield return new WaitForSeconds(playerAnimator.GetCurrentAnimatorStateInfo(0).length);
-        isAttacking = false; // 공격 종료
-    }
+        isZeroDuration = false;
+        playerAnimator.SetTrigger("doShot");
+        player_audio.PlayOneShot(swing_sound);
+        while (!isZeroDuration)
+        {
 
+            if (AnimInfo.IsName("doShot"))
+            {
+                isZeroDuration = true;
+                AnimDuration = AnimInfo.length;
+
+            }
+            yield return null;
+        }
+        yield return new WaitForSeconds(AnimDuration - (AnimDuration * 0.1f));
+        isZeroDuration = false;
+        isAttacking = null;
+        yield break;
+    }
     private void OnCollisionEnter(Collision collision)
     {
         // 충돌한 오브젝트가 prop 태그를 가지고 있는지 확인
-        if (collision.gameObject.CompareTag("prop"))
+        if (collision.gameObject.CompareTag("prop") && Daze_Coroutine == null)
         {
             Debug.Log("충돌");
 
             // 플레이어의 진행 방향을 계산하여 반대로 힘을 가함
-            Vector3 collisionDirection = -player_r.velocity.normalized;
-            player_r.AddForce(collisionDirection * add, ForceMode.Impulse);
-            player_audio.PlayOneShot(crash_sound);
+            Vector3 collisionDirection = -player_r.velocity;
+            player_r.AddForce(collisionDirection * 1.2f, ForceMode.Force);
 
-            // 충돌 상태 설정 및 Dazed 시작
-            isColliding = true;
-            StartDazed();
-            StartCoroutine(EndCollisionAfterDaze());
+
+            Daze_Coroutine = StartCoroutine(EndCollisionAfterDaze());
         }
-        else if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             //추가해야함~
         }
     }
-
     private IEnumerator EndCollisionAfterDaze()
     {
-        yield return new WaitForSeconds(dazeDuration);
-        isColliding = false;
+        isZeroDuration = false;
+        playerAnimator.SetTrigger("Dazed");
+        player_audio.PlayOneShot(crash_sound);
+
+        while (!isZeroDuration)
+        {
+
+            if (AnimInfo.IsName("Land"))
+            {
+                isZeroDuration = true;
+                AnimDuration = AnimInfo.length;
+
+            }
+            yield return null;
+        }
+        yield return new WaitForSeconds(AnimDuration - (AnimDuration * 0.1f));
+        isZeroDuration = false;
+        Daze_Coroutine = null;
+        yield break;
     }
 
     private IEnumerator PlayMovementSound()
@@ -347,4 +379,6 @@ public class Player_Gunner : MonoBehaviour
             }
         }
     }
+
+  
 }
