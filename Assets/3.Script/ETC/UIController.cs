@@ -38,6 +38,7 @@ public class UIController : MonoBehaviour
 
     public void OnClickStartButton()
     {
+        GameManager.instance.isGame = false;
         SceneManager.LoadScene("MainGame");
     }
 

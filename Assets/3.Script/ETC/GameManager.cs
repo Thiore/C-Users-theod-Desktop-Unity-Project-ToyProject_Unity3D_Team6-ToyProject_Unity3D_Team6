@@ -40,16 +40,32 @@ public class GameManager : MonoBehaviour
             selectPlayer = value;
         }
     }
-    private bool isGame = false;
 
-    private void Start()
-    {
-        if (SceneManager.GetActiveScene().name.Equals("MainGame"))
-            Cursor.lockState = CursorLockMode.Locked;
-        else
-            Cursor.lockState = CursorLockMode.None;
-    }
+    public bool isGame = false;
+
     
+    private void Update()
+    {
+        if(!isGame)
+        {
+            if (SceneManager.GetActiveScene().name.Equals("MainGame"))
+            {
+                Debug.Log("여기 안들어오니?");
+                if (FindObjectOfType<Player_Move>().gameObject.activeSelf)
+                    Destroy(FindObjectOfType<Player_Gunner>().gameObject);
+                if (FindObjectOfType<Player_Gunner>().gameObject.activeSelf)
+                    Destroy(FindObjectOfType<Player_Move>().gameObject);
+                Cursor.lockState = CursorLockMode.Locked;
+                isGame = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                isGame = true;
+            }
+                
+        }
+    }
 
 
 
