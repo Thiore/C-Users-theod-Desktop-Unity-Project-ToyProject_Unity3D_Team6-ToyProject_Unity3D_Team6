@@ -176,6 +176,7 @@ public class Player_Gunner : MonoBehaviour
             player_audio.PlayOneShot(roll_sound);
             RollingForward = transform.forward;
             DecreaseRollSpeed = rollSpeed;
+            //StartDazed();
             StartRolling();
         }
         Attack(); // 공격 처리
@@ -242,14 +243,14 @@ public class Player_Gunner : MonoBehaviour
     {
         isRolling = true;
         rollStartTime = Time.time;
-        playerAnimator.SetBool("isRolling", true);
+        playerAnimator.SetTrigger("Rolling");
     }
 
     private void StartDazed()
     {
         isDazed = true;
         dazeStartTime = Time.time;
-        playerAnimator.SetBool("isDazed", true);
+        playerAnimator.SetTrigger("Dazed");
     }
 
     private void Attack()
