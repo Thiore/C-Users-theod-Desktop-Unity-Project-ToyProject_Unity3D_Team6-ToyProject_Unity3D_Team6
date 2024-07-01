@@ -26,11 +26,14 @@ public class Enemy_Controller : MonoBehaviour
     public NavMeshAgent agent;
     public NavMeshAgent Agent { get => agent; protected set => agent = value; }
 
+    private Rigidbody enemy_r;
+
 
     private void Awake()
     {
         isDead = false;
         spawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
+        enemy_r = GetComponent<Rigidbody>();
         gameObject.SetActive(false);
     }
 
@@ -43,6 +46,14 @@ public class Enemy_Controller : MonoBehaviour
         MaxHp = data.MaxHp;
         CurrentHp = data.MaxHp;
         damage = data.damage;
+    }
+
+    private void FixedUpdate()
+    {
+        if(!isGround)
+        {
+            enemy_r.AddForce(Vector3.down * 50f);
+        }
     }
 
     private IEnumerator CheckGround()
@@ -59,8 +70,11 @@ public class Enemy_Controller : MonoBehaviour
             }
             else
             {
-                Vector3 direction = (player.transform.position - transform.position).normalized;
-                transform.position += direction * 5f/*agent.speed*/ * Time.deltaTime;
+                if(player != null)
+                {
+                    Vector3 direction = (player.transform.position - transform.position).normalized;
+                    transform.position += direction * 5f/*agent.speed*/ * Time.deltaTime;
+                }
             }
             yield return null;
         }
@@ -69,8 +83,7 @@ public class Enemy_Controller : MonoBehaviour
 
     public void SetupData(Enemy_Data data)
     {
-        this.data = data;
-       
+        this.data = data;       
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -107,6 +120,7 @@ public class Enemy_Controller : MonoBehaviour
     {
         if (!isDead)
         {
+            GameManager.instance.AddScore(data.score);
             isDead = true;
             StopCoroutine(Update_target_position_co());
             agent.enabled = false;

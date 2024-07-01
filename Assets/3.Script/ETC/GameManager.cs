@@ -13,6 +13,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
+    private string name;
+    private int score = 0;
+    public string Name { get => name; set => name = value; }
+    public int Score { get => score; set => score = value; }
+
+
     private void Awake()
     {
         if(instance == null)
@@ -40,9 +46,10 @@ public class GameManager : MonoBehaviour
             selectPlayer = value;
         }
     }
-   
-    
 
-
+    public void AddScore(int score)
+    {
+        this.score += score;
+    }
 
 }

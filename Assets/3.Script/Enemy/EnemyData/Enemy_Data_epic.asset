@@ -15,3 +15,4 @@ MonoBehaviour:
   MaxHp: 20
   damage: 6
   speed: 12
+  score: 50
