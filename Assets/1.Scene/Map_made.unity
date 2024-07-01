@@ -304,7 +304,7 @@ Transform:
   - {fileID: 638846469}
   - {fileID: 1505489116}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1402657687
 MonoBehaviour:
@@ -319,6 +319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartHealth: 3
+  CurrentHealth: 0
   isDie: 0
 --- !u!1 &1505489115
 GameObject:
@@ -433,7 +434,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -154.978, z: -0.008}
 --- !u!114 &1626581647
 MonoBehaviour:
@@ -485,10 +486,6 @@ MonoBehaviour:
   Obstacle:
     serializedVersion: 2
     m_Bits: 0
-  Runa: {fileID: 1739703751}
-  Obstacle:
-    serializedVersion: 2
-    m_Bits: 64
   CullingAlpha: 0.3
   CameraPosY: 40
   CameraPosZ: 25
@@ -557,13 +554,22 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1739703751 stripped
+--- !u!4 &1739703751
 Transform:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 3787738877002031555, guid: 0af8ed4d07c1d29449c169b6d1f6cfb4, type: 3}
-  m_PrefabInstance: {fileID: 3787738877366870924}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846535933}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1786721298
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,8 +661,24 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1846535933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1739703751}
+  m_Layer: 0
+  m_Name: 'Recovery GameObject for Transform (ID in file: 1739703751)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &37203030435826053
 Transform:
   m_ObjectHideFlags: 0
@@ -1761,7 +1783,7 @@ Transform:
   m_Children:
   - {fileID: 37203032466824541}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &37203032196264357
 MonoBehaviour:
@@ -1784,6 +1806,7 @@ MonoBehaviour:
   roll_sound: {fileID: 8300000, guid: 13182107f288fdc47a11f9216c8f062b, type: 3}
   walk_sound: {fileID: 8300000, guid: c36fa08ef01a24023aed81ce8c980720, type: 3}
   run_sound: {fileID: 8300000, guid: 7c27a13555c6947eab6aca916a0f03ed, type: 3}
+  damage_sound: {fileID: 0}
   equiaWeapon: {fileID: 7964758283460910769}
 --- !u!136 &37203032196264358
 CapsuleCollider:
@@ -9069,7 +9092,7 @@ Transform:
   - {fileID: 3886392197632622805}
   - {fileID: 3886392197001873880}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3886392197988398162
 GameObject:
