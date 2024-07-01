@@ -8,6 +8,14 @@ public class GameUI : MonoBehaviour
     [SerializeField] private GameObject HeartPrefabs;
     [SerializeField] private Camera FinalCamera;
     [SerializeField] private Text Score;
+    [SerializeField] private Text Fisrt;
+    [SerializeField] private Text Second;
+    [SerializeField] private Text Third;
+    [SerializeField] private Text FScore;
+    [SerializeField] private Text SScore;
+    [SerializeField] private Text TScore;
+    
+
     private GameObject Heart;
     private List<GameObject> HeartList = new List<GameObject>();
     private Player_Health currentHealth;
@@ -40,9 +48,13 @@ public class GameUI : MonoBehaviour
     {
         if (!HeartList.Count.Equals(currentHealth.CurrentHealth))
         {
-            Debug.Log("¿©±âµé¾î¿È?");
             Destroy(HeartList[HeartList.Count - 1]);
             HeartList.RemoveAt(HeartList.Count - 1);
         }
+    }
+
+    private void Ranking()
+    {
+
     }
 }

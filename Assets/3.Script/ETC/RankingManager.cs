@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using System.IO;
 
 public class RankingManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class RankingManager : MonoBehaviour
 
     private void Awake()
     {
+        
         if (instance == null)
         {
             instance = this;
@@ -18,15 +20,22 @@ public class RankingManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+        //LoadRank();
     }
 
     public List<RankData> ranks = new List<RankData>();
+    public RankData[] ranks_a = new RankData[4];
+    
     private RankData rank = new RankData();
     public void SortRank()
     {
+        if(ranks.Count > 0)
+        {
+            ranks.Sort((rank1, rank2) => rank1.score.CompareTo(rank2.score));
+        }
 
-        
+
+
     }
     public void SaveRank()
     {
@@ -48,6 +57,8 @@ public class RankingManager : MonoBehaviour
         string jsonData = File.ReadAllText(path);
         ranks = JsonUtility.FromJson<List<RankData>>(jsonData);
     }
+
+    
 }
 
 

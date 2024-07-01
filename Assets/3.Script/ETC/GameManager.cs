@@ -13,9 +13,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
-    private string name;
+    //private string name;
     private int score = 0;
-    public string Name { get => name; set => name = value; }
+    //public string Name { get => name; set => name = value; }
     public int Score { get => score; set => score = value; }
 
 
