@@ -72,8 +72,7 @@ public class Enemy_Controller : MonoBehaviour
 
     public void SetupData(Enemy_Data data)
     {
-        this.data = data;
-       
+        this.data = data;       
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -110,6 +109,7 @@ public class Enemy_Controller : MonoBehaviour
     {
         if (!isDead)
         {
+            GameManager.instance.AddScore(data.score);
             isDead = true;
             StopCoroutine(Update_target_position_co());
             agent.enabled = false;
