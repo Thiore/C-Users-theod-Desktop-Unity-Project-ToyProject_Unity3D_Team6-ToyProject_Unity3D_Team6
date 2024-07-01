@@ -9,8 +9,12 @@ public class Player_Health : MonoBehaviour
     private Animator playerAnimator;
     public bool isDie = false;
 
+    private float behittime = 3f;
+    private float belasthit;
+
     private void Start()
     {
+        belasthit = 0;
         CurrentHealth = StartHealth;  // 시작할 때 현재 체력을 시작 체력으로 설정
         playerAnimator = GetComponentInChildren<Animator>();
     }
@@ -35,12 +39,18 @@ public class Player_Health : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        // 충돌한 오브젝트가 Enemy 태그를 가지고 있는지 확인
-        if (collision.gameObject.CompareTag("Enemy"))
+        if(!isDie && Time.time >= behittime + belasthit)
         {
-            OnDamage(1);  // 데미지를 1만큼 받음 (필요에 따라 데미지 값을 조정할 수 있음)
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                belasthit = Time.time;
+                Debug.Log(belasthit);
+                Debug.Log(":맞");
+                OnDamage(1);
+            }
         }
+
     }
 }

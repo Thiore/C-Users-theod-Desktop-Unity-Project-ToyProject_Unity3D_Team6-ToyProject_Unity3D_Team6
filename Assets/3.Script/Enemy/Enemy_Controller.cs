@@ -59,8 +59,11 @@ public class Enemy_Controller : MonoBehaviour
             }
             else
             {
-                Vector3 direction = (player.transform.position - transform.position).normalized;
-                transform.position += direction * 5f/*agent.speed*/ * Time.deltaTime;
+                if(player != null)
+                {
+                    Vector3 direction = (player.transform.position - transform.position).normalized;
+                    transform.position += direction * 5f/*agent.speed*/ * Time.deltaTime;
+                }
             }
             yield return null;
         }
