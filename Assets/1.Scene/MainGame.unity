@@ -3123,6 +3123,7 @@ GameObject:
   - component: {fileID: 1091791089}
   - component: {fileID: 1091791091}
   - component: {fileID: 1091791090}
+  - component: {fileID: 1091791092}
   m_Layer: 0
   m_Name: Tile_Water
   m_TagString: Floor
@@ -3192,6 +3193,20 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091791088}
+  m_Mesh: {fileID: 4885689789815097959, guid: ef7372b852139454b8268e6dab6fad01, type: 3}
+--- !u!64 &1091791092
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091791088}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
   m_Mesh: {fileID: 4885689789815097959, guid: ef7372b852139454b8268e6dab6fad01, type: 3}
 --- !u!1 &1129433408
 GameObject:
@@ -16471,14 +16486,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4f3f3122514dd41826692b622a6557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 50
-  runSpeed: 80
-  rollSpeed: 120
+  walkSpeed: 20
+  runSpeed: 30
+  rollSpeed: 40
   rollDuration: 0.5
   dazeDuration: 0.5
   MouseSpeed: 685
   swing_sound: {fileID: 8300000, guid: fb5f441e133415448b36ce730c22d92f, type: 3}
-  crash_sound: {fileID: 0}
+  crash_sound: {fileID: 8300000, guid: 6196bc284b80c4c54a21b261031f4830, type: 3}
   roll_sound: {fileID: 8300000, guid: 13182107f288fdc47a11f9216c8f062b, type: 3}
   walk_sound: {fileID: 8300000, guid: 9f110f013401f42e996da5094d6f8b8b, type: 3}
   run_sound: {fileID: 8300000, guid: 7c27a13555c6947eab6aca916a0f03ed, type: 3}
