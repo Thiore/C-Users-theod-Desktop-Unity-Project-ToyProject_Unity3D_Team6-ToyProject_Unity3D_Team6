@@ -4482,6 +4482,7 @@ MonoBehaviour:
   Obstacle:
     serializedVersion: 2
     m_Bits: 128
+  CullingAlpha: 0.3
   CameraPosY: 40
   CameraPosZ: 25
   CameraRotX: 50
@@ -7339,15 +7340,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6891779cf2f9944827080c257aefcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 20
-  runSpeed: 30
-  rollSpeed: 40
+  walkSpeed: 40
+  runSpeed: 70
+  rollSpeed: 80
   MouseSpeed: 390
   swing_sound: {fileID: 8300000, guid: 7053294e066eb1945baa4d9cc9194f15, type: 3}
   crash_sound: {fileID: 8300000, guid: 34b722ffc09ef4831a89b6502cd42f7e, type: 3}
   roll_sound: {fileID: 8300000, guid: 13182107f288fdc47a11f9216c8f062b, type: 3}
   walk_sound: {fileID: 8300000, guid: c36fa08ef01a24023aed81ce8c980720, type: 3}
   run_sound: {fileID: 8300000, guid: 7c27a13555c6947eab6aca916a0f03ed, type: 3}
+  damage_sound: {fileID: 8300000, guid: 58ccec2859d7544f5880b3202cc15dc1, type: 3}
   equiaWeapon: {fileID: 7964758283460910769}
 --- !u!136 &37203032196264358
 CapsuleCollider:

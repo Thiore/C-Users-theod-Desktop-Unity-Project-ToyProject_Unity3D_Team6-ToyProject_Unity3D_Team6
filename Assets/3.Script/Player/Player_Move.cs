@@ -31,6 +31,7 @@ public class Player_Move : MonoBehaviour
     [SerializeField] private AudioClip roll_sound;
     [SerializeField] private AudioClip walk_sound;
     [SerializeField] private AudioClip run_sound;
+    [SerializeField] private AudioClip damage_sound;
     #endregion
 
     #region 클래스 변수
@@ -279,6 +280,7 @@ public class Player_Move : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             //추가해야함~
+            player_audio.PlayOneShot(damage_sound);
         }
     }
     public void Land()
