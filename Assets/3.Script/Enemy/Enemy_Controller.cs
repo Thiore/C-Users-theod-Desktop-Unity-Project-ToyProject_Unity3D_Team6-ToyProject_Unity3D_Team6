@@ -9,7 +9,7 @@ public class Enemy_Controller : MonoBehaviour
 {
     [Header("추적할 대상 레이어")]
     public LayerMask TartgetLayer;
-    private Player_Controller player;
+    private GameObject player;
 
     private EnemySpawner spawner;
 
@@ -30,24 +30,19 @@ public class Enemy_Controller : MonoBehaviour
     private void Awake()
     {
         isDead = false;
-        player = FindObjectOfType<Player_Controller>();
         spawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
-        agent = GetComponent<NavMeshAgent>();
         gameObject.SetActive(false);
     }
 
     private void OnEnable()
     {
         isGround = false;
+        player = GameObject.FindWithTag("Player");
+        agent = GetComponent<NavMeshAgent>();
         StartCoroutine(CheckGround());
         MaxHp = data.MaxHp;
         CurrentHp = data.MaxHp;
         damage = data.damage;
-    }
-
-    private void Update()
-    {
-
     }
 
     private IEnumerator CheckGround()
@@ -132,6 +127,5 @@ public class Enemy_Controller : MonoBehaviour
             yield return null;
         }
     }
-
 
 }

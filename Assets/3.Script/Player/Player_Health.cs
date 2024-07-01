@@ -5,14 +5,15 @@ using UnityEngine;
 public class Player_Health : MonoBehaviour
 {
     [SerializeField] private int StartHealth = 100;  // 시작 체력
-    private int CurrentHealth;  // 현재 체력
+    public int CurrentHealth;  // 현재 체력
     private Animator playerAnimator;
-    public bool isDie = false;
+    public bool isDie;
 
-    private void Start()
+    private void Awake()
     {
         CurrentHealth = StartHealth;  // 시작할 때 현재 체력을 시작 체력으로 설정
         playerAnimator = GetComponentInChildren<Animator>();
+        isDie = false;
     }
 
     public void OnDamage(int damage)
