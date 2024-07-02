@@ -60,32 +60,35 @@ public class GameUI : MonoBehaviour
         RankingManager.instance.SetRanking_Data();
         CurrentScore.text = RankingManager.instance.rank.score.ToString();
         CurrentName.text = RankingManager.instance.rank.name;
-        
-        List<RankData> ranks= RankingManager.instance.LoadRank();
 
-        Debug.Log(ranks.Count);
-        switch(ranks.Count)
+        RankList rankings = RankingManager.instance.LoadRank();
+        
+        RankingManager.instance.Rank_List = rankings.ranks;
+
+        switch (RankingManager.instance.Rank_List.Count)
         {
             case 1:
-                Fisrt.text = ranks[0].name;
-                FScore.text = ranks[0].score.ToString();
+                Fisrt.text = RankingManager.instance.Rank_List[0].name;
+                FScore.text = RankingManager.instance.Rank_List[0].score.ToString();
                 break;
             case 2:
-                Fisrt.text = ranks[0].name;
-                FScore.text = ranks[0].score.ToString();
-                Second.text = ranks[1].name;
-                SScore.text = ranks[1].score.ToString();
+                Fisrt.text = RankingManager.instance.Rank_List[0].name;
+                FScore.text = RankingManager.instance.Rank_List[0].score.ToString();
+                Second.text = RankingManager.instance.Rank_List[1].name;
+                SScore.text = RankingManager.instance.Rank_List[1].score.ToString();
                 break;
             case 3:
-                Fisrt.text = ranks[0].name;
-                FScore.text = ranks[0].score.ToString();
-                Second.text = ranks[1].name;
-                SScore.text = ranks[1].score.ToString();
-                Third.text = ranks[2].name;
-                TScore.text = ranks[2].score.ToString();
+                Fisrt.text = RankingManager.instance.Rank_List[0].name;
+                FScore.text = RankingManager.instance.Rank_List[0].score.ToString();
+                Second.text = RankingManager.instance.Rank_List[1].name;
+                SScore.text = RankingManager.instance.Rank_List[1].score.ToString();
+                Third.text = RankingManager.instance.Rank_List[2].name;
+                TScore.text = RankingManager.instance.Rank_List[2].score.ToString();
+                break;
+            default:
                 break;
         }
-        RankingManager.instance.Rank_List = ranks;
+       
         
 
     }

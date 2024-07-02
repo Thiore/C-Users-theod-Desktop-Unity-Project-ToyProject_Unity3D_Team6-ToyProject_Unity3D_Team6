@@ -164,7 +164,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &17014419
 GameObject:
@@ -751,6 +751,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 546355a919a7f184fa3653cb1844c3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Rank_List: []
+  rank:
+    name: 
+    score: 0
 --- !u!4 &882019421
 Transform:
   m_ObjectHideFlags: 0
@@ -763,7 +767,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &888388961
 GameObject:
@@ -1155,7 +1159,7 @@ Transform:
   m_Children:
   - {fileID: 1034387616}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!114 &1257137860
 MonoBehaviour:
@@ -1363,7 +1367,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1719355655
 GameObject:
@@ -1464,7 +1468,7 @@ RectTransform:
   - {fileID: 3787738876813280151}
   - {fileID: 551370377}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7225,7 +7229,7 @@ Transform:
   - {fileID: 4248052505156287352}
   - {fileID: 4248052506609015151}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4248052506310112119
 GameObject:

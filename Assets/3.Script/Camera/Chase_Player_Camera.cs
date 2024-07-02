@@ -9,7 +9,7 @@ public class Chase_Player_Camera : MonoBehaviour
 
     [SerializeField] private LayerMask Obstacle;
 
-    private AudioSource audio;
+    private AudioSource Camera_audio;
     private Transform Player;
     public AudioClip dieClip;
 
@@ -29,7 +29,7 @@ public class Chase_Player_Camera : MonoBehaviour
         GameManager.instance.Score = 0;
         if (GameManager.instance.SelectPlayer.Equals(ePlayer.Mango))
         {
-            Debug.Log(GameManager.instance.SelectPlayer);
+            
             Player = Mango;
             Runa.gameObject.SetActive(false);
             Destroy(Runa.gameObject);
@@ -43,7 +43,7 @@ public class Chase_Player_Camera : MonoBehaviour
         }
         Cursor.lockState = CursorLockMode.Confined;
         //Debug.Log("나안불림");
-        audio = GetComponent<AudioSource>();
+        Camera_audio = GetComponent<AudioSource>();
         isDead = false;
     }
 
@@ -96,8 +96,8 @@ public class Chase_Player_Camera : MonoBehaviour
         {
             if (!isDead)
             {
-                audio.Stop();
-                audio.PlayOneShot(dieClip);
+                Camera_audio.Stop();
+                Camera_audio.PlayOneShot(dieClip);
                 
                 isDead = true;
             }

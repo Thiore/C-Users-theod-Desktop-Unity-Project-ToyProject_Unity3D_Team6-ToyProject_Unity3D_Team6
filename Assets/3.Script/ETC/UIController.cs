@@ -25,14 +25,14 @@ public class UIController : MonoBehaviour
     private IEnumerator ChangeMango()
     {
         Runa.gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         Mango.gameObject.SetActive(true);
     }
 
     private IEnumerator ChangeRuna()
     {
         Mango.gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         Runa.gameObject.SetActive(true);
     }
 

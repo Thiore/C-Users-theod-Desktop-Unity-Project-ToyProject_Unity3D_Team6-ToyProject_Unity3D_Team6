@@ -25,12 +25,14 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            selectPlayer = ePlayer.Mango;
         }
         else
         {
             Destroy(gameObject);
         }
-        selectPlayer = ePlayer.Mango;
+        
+        
     }
 
     private ePlayer selectPlayer;

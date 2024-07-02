@@ -62,6 +62,7 @@ public class Player_Health : MonoBehaviour
                 //RankingManager.instance.SaveRank();
                 Die();  // 체력이 0 이하가 되면 Die 메서드 호출
                 RankingManager.instance.SetRanking_Data();
+                RankingManager.instance.SaveRank();
                 FindObjectOfType<GameUI>().LoadBoard();
             }
         }
