@@ -49,7 +49,7 @@ public class Player_Health : MonoBehaviour
             if (!isDie)//isdie가 false일 경우에만 ondamage 메서드 호출
             {
                 CurrentHealth -= damage;  // 데미지를 받으면 현재 체력을 감소
-                Debug.Log("데미지");
+                //Debug.Log("데미지");
             }
             else // isdie가 true일 경우 즉시 리턴
             {
@@ -62,6 +62,7 @@ public class Player_Health : MonoBehaviour
                 //RankingManager.instance.SaveRank();
                 Die();  // 체력이 0 이하가 되면 Die 메서드 호출
                 RankingManager.instance.SetRanking_Data();
+                FindObjectOfType<GameUI>().LoadBoard();
             }
         }
         
@@ -70,7 +71,7 @@ public class Player_Health : MonoBehaviour
     private void Die()
     {
         // 플레이어가 죽었을 때 처리
-        Debug.Log("Player is dead!");
+        //Debug.Log("Player is dead!");
         // 여기서 플레이어 사망 시 처리를 추가할 수 있습니다. 예: 게임 오버 화면 표시, 플레이어 비활성화 등
         playerAnimator.SetTrigger("Die");
         isDie = true;
@@ -88,8 +89,8 @@ public class Player_Health : MonoBehaviour
             if (other.gameObject.CompareTag("Enemy"))
             {
                 belasthit = Time.time;
-                Debug.Log(belasthit);
-                Debug.Log(":맞");
+                //Debug.Log(belasthit);
+                //Debug.Log(":맞");
                 OnDamage(1);
             }
         }

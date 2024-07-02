@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
         else if (collision.gameObject.tag == "Enemy")
         {
             Rigid.velocity = Vector3.zero;
-            Debug.Log("±¦Âú´Ï?...");
+            //Debug.Log("±¦Âú´Ï?...");
             gameObject.SetActive(false);
         }
 

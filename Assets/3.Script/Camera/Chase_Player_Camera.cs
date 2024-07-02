@@ -42,7 +42,7 @@ public class Chase_Player_Camera : MonoBehaviour
             Destroy(Mango.gameObject);
         }
         Cursor.lockState = CursorLockMode.Confined;
-        Debug.Log("나안불림");
+        //Debug.Log("나안불림");
         audio = GetComponent<AudioSource>();
         isDead = false;
     }

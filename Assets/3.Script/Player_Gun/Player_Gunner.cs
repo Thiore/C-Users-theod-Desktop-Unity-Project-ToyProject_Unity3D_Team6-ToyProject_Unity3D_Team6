@@ -278,7 +278,7 @@ public class Player_Gunner : MonoBehaviour
         if (fdown && isFireReady && Daze_Coroutine == null && !isSwap)
         {
 
-            Debug.Log("사용");
+            //Debug.Log("사용");
             equipWeapon.Use();
             playerAnimator.SetTrigger("doShot");
             fireDelay = 0;

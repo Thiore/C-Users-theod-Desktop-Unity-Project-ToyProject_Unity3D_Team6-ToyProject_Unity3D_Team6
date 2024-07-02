@@ -34,8 +34,7 @@ public class GameUI : MonoBehaviour
             Heart.transform.localScale = new Vector3(50, 50, 50);
             HeartList.Add(Heart);
         }
-        Debug.Log(currentHealth.gameObject.name);
-        Debug.Log(currentHealth.CurrentHealth);
+        
     }
     private void Update()
     {
@@ -63,6 +62,8 @@ public class GameUI : MonoBehaviour
         CurrentName.text = RankingManager.instance.rank.name;
         
         List<RankData> ranks= RankingManager.instance.LoadRank();
+
+        Debug.Log(ranks.Count);
         switch(ranks.Count)
         {
             case 1:
@@ -84,7 +85,7 @@ public class GameUI : MonoBehaviour
                 TScore.text = ranks[2].score.ToString();
                 break;
         }
-
+        RankingManager.instance.Rank_List = ranks;
         
 
     }

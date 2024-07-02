@@ -98,7 +98,7 @@ public class Enemy_Controller : MonoBehaviour
     {
         if (other.transform.CompareTag("Melee"))
         {
-            Debug.Log("처맞음");
+            //Debug.Log("처맞음");
             OnDamage(other.transform.GetComponent<Weapon>().Damage);
         }
     }

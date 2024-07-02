@@ -9,6 +9,7 @@ public class Rotation_Map : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
+        GameManager.instance.SelectPlayer = ePlayer.Mango;
     }
     private void Update()
     {
