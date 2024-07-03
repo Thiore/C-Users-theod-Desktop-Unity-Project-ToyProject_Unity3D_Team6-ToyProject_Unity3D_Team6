@@ -9,6 +9,9 @@ public class RankData
     public string name;
     public int score;
 }
+
+[System.Serializable]
+
 public class RankList
 {
     public List<RankData> ranks;
