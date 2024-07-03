@@ -70,6 +70,22 @@ public class RankingManager : MonoBehaviour
                     return;
                 }
             }
+            else
+            {
+                if(i==0)
+                {
+                    Rank_List.Insert(i, rank);
+                    if (Rank_List.Count == 4)
+                        Rank_List.RemoveAt(Rank_List.Count - 1);
+                    string jsonData = JsonUtility.ToJson(new RankList() { ranks = Rank_List });
+                    string path = Path.Combine(Application.dataPath, "rankData.json");
+                    Debug.Log("path : " + path);
+                    Debug.Log("jsonData : " + jsonData);
+                    File.WriteAllText(path, jsonData);
+                    return;
+                }
+                
+            }
             
             
         }

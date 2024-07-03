@@ -26,7 +26,6 @@ public class Chase_Player_Camera : MonoBehaviour
     private bool isDead = false;
     private void Start()
     {
-        GameManager.instance.Score = 0;
         if (GameManager.instance.SelectPlayer.Equals(ePlayer.Mango))
         {
             

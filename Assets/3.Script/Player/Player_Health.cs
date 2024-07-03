@@ -59,11 +59,11 @@ public class Player_Health : MonoBehaviour
 
             if (CurrentHealth <= 0)
             {
-                //RankingManager.instance.SaveRank();
+               
                 Die();  // 체력이 0 이하가 되면 Die 메서드 호출
-                RankingManager.instance.SetRanking_Data();
-                RankingManager.instance.SaveRank();
-                FindObjectOfType<GameUI>().LoadBoard();
+                
+                
+                
             }
         }
         
@@ -76,8 +76,9 @@ public class Player_Health : MonoBehaviour
         // 여기서 플레이어 사망 시 처리를 추가할 수 있습니다. 예: 게임 오버 화면 표시, 플레이어 비활성화 등
         playerAnimator.SetTrigger("Die");
         isDie = true;
+        RankingManager.instance.SetRanking_Data();
         ScoreBoard.SetActive(true);
-        
+        FindObjectOfType<GameUI>().LoadBoard();
 
 
 
