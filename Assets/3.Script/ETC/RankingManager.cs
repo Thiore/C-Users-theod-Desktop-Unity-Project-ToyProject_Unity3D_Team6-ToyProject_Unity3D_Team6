@@ -44,8 +44,7 @@ public class RankingManager : MonoBehaviour
 
             string jsonData = JsonUtility.ToJson(new RankList(){ ranks = Rank_List });
             string path = Path.Combine(Application.dataPath, "rankData.json");
-            Debug.Log("path : " + path);
-            Debug.Log("jsonData : " + jsonData);
+            
             File.WriteAllText(path, jsonData);
             return;
         }
@@ -64,8 +63,7 @@ public class RankingManager : MonoBehaviour
                         Rank_List.RemoveAt(Rank_List.Count - 1);
                     string jsonData = JsonUtility.ToJson(new RankList() { ranks = Rank_List });
                     string path = Path.Combine(Application.dataPath, "rankData.json");
-                    Debug.Log("path : " + path);
-                    Debug.Log("jsonData : " + jsonData);
+                    
                     File.WriteAllText(path, jsonData);
                     return;
                 }

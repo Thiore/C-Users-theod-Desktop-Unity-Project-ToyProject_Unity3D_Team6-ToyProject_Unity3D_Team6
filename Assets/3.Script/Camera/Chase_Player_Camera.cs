@@ -44,6 +44,7 @@ public class Chase_Player_Camera : MonoBehaviour
         //Debug.Log("나안불림");
         Camera_audio = GetComponent<AudioSource>();
         isDead = false;
+        GameManager.instance.Score = 0;
     }
 
     private void Update()

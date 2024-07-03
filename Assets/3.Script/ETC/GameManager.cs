@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        score = 0;
+       
     }
 
     private ePlayer selectPlayer;
