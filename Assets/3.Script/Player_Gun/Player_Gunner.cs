@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class Player_Gunner : MonoBehaviour
 {
-    [SerializeField] public float walkSpeed = 100f;
-    [SerializeField] public float runSpeed = 150f;
-    [SerializeField] public float rollSpeed = 100f;
+    [SerializeField] public float walkSpeed = 30f;
+    [SerializeField] public float runSpeed = 50f;
+    [SerializeField] public float rollSpeed = 70f;
     [SerializeField] public float rollDuration = 0.5f;
     [SerializeField] public float dazeDuration = 0.5f; // 이동을 못하는 시간
     private AudioSource player_audio;
 
     #region 영훈 / 마우스 감도
     [Range(100, 1000)]
-    [SerializeField] public float MouseSpeed = 500f;
+    [SerializeField] public float MouseSpeed = 400f;
     [SerializeField] private AudioClip swing_sound;
     [SerializeField] private AudioClip crash_sound;
     [SerializeField] private AudioClip roll_sound;
     [SerializeField] private AudioClip walk_sound;
     [SerializeField] private AudioClip run_sound;
+    [SerializeField] private AudioClip damage_sound;
     #endregion
 
     #region 클래스 변수
@@ -323,7 +324,10 @@ public class Player_Gunner : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            //추가해야함~
+            if (!player_Health.isDie)
+            {
+                player_audio.PlayOneShot(damage_sound);
+            }
         }
     }
     private IEnumerator EndCollisionAfterDaze()

@@ -23,7 +23,7 @@ public class Weapon : MonoBehaviour
 
     private GameObject[] bulletPool;
     private GameObject[] bulletCasePool;
-    private int poolSize = 10;
+    private int poolSize = 20;
     private int nextBullet = 0;
     private int nextBulletCase = 0;
 

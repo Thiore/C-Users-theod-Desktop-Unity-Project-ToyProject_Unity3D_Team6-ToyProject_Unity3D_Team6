@@ -8057,10 +8057,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6891779cf2f9944827080c257aefcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 50
-  runSpeed: 80
-  rollSpeed: 100
-  MouseSpeed: 390
+  walkSpeed: 30
+  runSpeed: 50
+  rollSpeed: 70
+  MouseSpeed: 400
   swing_sound: {fileID: 8300000, guid: 7053294e066eb1945baa4d9cc9194f15, type: 3}
   crash_sound: {fileID: 8300000, guid: 34b722ffc09ef4831a89b6502cd42f7e, type: 3}
   roll_sound: {fileID: 8300000, guid: 13182107f288fdc47a11f9216c8f062b, type: 3}
@@ -16604,7 +16604,7 @@ Transform:
   - {fileID: 6440517094556218196}
   m_Father: {fileID: 6440517094483143561}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 10.480709, y: 89.00479, z: -88.75814}
+  m_LocalEulerAnglesHint: {x: -0.3192987, y: 59.48617, z: -85.280594}
 --- !u!1 &6440517094224656298
 GameObject:
   m_ObjectHideFlags: 0
@@ -16636,7 +16636,7 @@ Transform:
   - {fileID: 6440517094288366776}
   m_Father: {fileID: 6440517095852674079}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 4.1101046, y: 28.50955, z: 0.05019268}
+  m_LocalEulerAnglesHint: {x: 24.085083, y: -1.3162273, z: 0.5550967}
 --- !u!1 &6440517094283553304
 GameObject:
   m_ObjectHideFlags: 0
@@ -16667,7 +16667,7 @@ Transform:
   - {fileID: 6440517095934284940}
   m_Father: {fileID: 6440517094697400462}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -89.527695, y: -135.07498, z: -134.92589}
+  m_LocalEulerAnglesHint: {x: -89.52645, y: -135.05019, z: -134.95068}
 --- !u!4 &6440517094288366776
 Transform:
   m_ObjectHideFlags: 0
@@ -16860,7 +16860,7 @@ Transform:
   - {fileID: 6440517094187917617}
   m_Father: {fileID: 6440517095966605043}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -1.6190821, y: -0.6006633, z: 65.351006}
+  m_LocalEulerAnglesHint: {x: -31.771357, y: -178.6261, z: -92.980095}
 --- !u!23 &6440517094483840584
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17088,7 +17088,7 @@ Transform:
   - {fileID: 6440517094832088712}
   m_Father: {fileID: 6440517095966605043}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 57.80641, y: -87.334854, z: -86.852135}
+  m_LocalEulerAnglesHint: {x: 4.281045, y: 1.749268, z: 5.1859527}
 --- !u!1 &6440517094702497897
 GameObject:
   m_ObjectHideFlags: 0
@@ -17119,7 +17119,7 @@ Transform:
   - {fileID: 6440517095508644260}
   m_Father: {fileID: 6440517095966605043}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -0.6007917, y: 1.6190343, z: -114.63995}
+  m_LocalEulerAnglesHint: {x: -31.865705, y: 178.56026, z: 88.51865}
 --- !u!114 &6440517094759501514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17156,7 +17156,7 @@ Transform:
   - {fileID: 6440517095104559907}
   m_Father: {fileID: 6440517094697400462}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -89.52687, y: 135.10059, z: 134.90056}
+  m_LocalEulerAnglesHint: {x: -89.52687, y: 135.09927, z: 134.90158}
 --- !u!1 &6440517094832088719
 GameObject:
   m_ObjectHideFlags: 0
@@ -17264,7 +17264,7 @@ Transform:
   - {fileID: 6440517095594680670}
   m_Father: {fileID: 6440517094832088712}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -53.397633, y: -86.35552, z: -8.65586}
+  m_LocalEulerAnglesHint: {x: -4.7684174, y: -63.01787, z: -12.412437}
 --- !u!1 &6440517095249962964
 GameObject:
   m_ObjectHideFlags: 0
@@ -17502,7 +17502,7 @@ Transform:
   - {fileID: 6440517094470409575}
   m_Father: {fileID: 6440517094702497898}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 24.450943, y: -87.47858, z: 90.541954}
+  m_LocalEulerAnglesHint: {x: 14.319653, y: -58.208824, z: 88.20183}
 --- !u!1 &6440517095508644267
 GameObject:
   m_ObjectHideFlags: 0
@@ -17531,17 +17531,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4f3f3122514dd41826692b622a6557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 40
-  runSpeed: 70
-  rollSpeed: 80
+  walkSpeed: 30
+  runSpeed: 50
+  rollSpeed: 70
   rollDuration: 0.5
   dazeDuration: 0.5
-  MouseSpeed: 685
+  MouseSpeed: 400
   swing_sound: {fileID: 8300000, guid: fb5f441e133415448b36ce730c22d92f, type: 3}
   crash_sound: {fileID: 8300000, guid: 6196bc284b80c4c54a21b261031f4830, type: 3}
   roll_sound: {fileID: 8300000, guid: 13182107f288fdc47a11f9216c8f062b, type: 3}
   walk_sound: {fileID: 8300000, guid: 9f110f013401f42e996da5094d6f8b8b, type: 3}
   run_sound: {fileID: 8300000, guid: 7c27a13555c6947eab6aca916a0f03ed, type: 3}
+  damage_sound: {fileID: 8300000, guid: 46f921c425e8043f797ad496e6670211, type: 3}
   equiaWeapon: {fileID: 6440517095851048525}
   weapons:
   - {fileID: 6440517095851048525}
@@ -17889,7 +17890,7 @@ Transform:
   - {fileID: 6440517094224656299}
   m_Father: {fileID: 6440517094697400462}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0.000008867093, y: -2.3631921e-14, z: -1.4885695e-21}
+  m_LocalEulerAnglesHint: {x: 0.000009162837, y: -0.0000000015906334, z: -0.000000014845897}
 --- !u!1 &6440517095866447884
 GameObject:
   m_ObjectHideFlags: 0
@@ -17965,7 +17966,7 @@ Transform:
   - {fileID: 6440517095298106123}
   m_Father: {fileID: 6440517094283553305}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -55.915966, y: -4.582716, z: 2.932924}
+  m_LocalEulerAnglesHint: {x: -41.170013, y: 84.33458, z: -33.05317}
 --- !u!1 &6440517095934284947
 GameObject:
   m_ObjectHideFlags: 0
